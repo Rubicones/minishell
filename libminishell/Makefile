@@ -6,13 +6,13 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/03/28 20:34:57 by ejafer           ###   ########.fr        #
+#    Updated: 2022/03/28 20:34:27 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	Minishell
+NAME	=	libminishell
 
-NAMES	=	minishell
+NAMES	=	
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
@@ -30,11 +30,9 @@ MD			=	mkdir -p
 
 all: ${NAME}
 
-libminishell.a:
-		$(MAKE) -C libminishell/
 
-$(NAME): ${OBJ} Makefile | libminishell.a
-			$(CC) $(CFLAGS) $(OBJ) -o ${NAME}
+$(NAME): ${OBJ} Makefile 
+			$(AR) libminishell ${OBJ}
 
 $(OBJ_DIR):
 			${MD} $(OBJ_DIR)
