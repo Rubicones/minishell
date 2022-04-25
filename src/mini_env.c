@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 20:35:09 by ejafer            #+#    #+#             */
-/*   Updated: 2022/04/25 17:15:17 by ejafer           ###   ########.fr       */
+/*   Created: 2022/04/25 16:03:49 by ejafer            #+#    #+#             */
+/*   Updated: 2022/04/25 17:15:41 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "libft.h"
 
-void	minishell(t_mini *mini)
+char *mini_env(t_mini *mini)
 {
-	while (1)
+	char	*result;
+	char	*tmp;
+	int		i;
+
+	i = -1;
+	result = malloc(sizeof(char) * 1);
+	result[0] = 0;
+	while (mini->env[++i])
 	{
-		mini->line = readline("\033[32mMinishell\033[0m$: ");
-		add_history(mini->line);
-		execute_line(mini);
-		free(mini->line);
-		mini->line = NULL;
+		tmp = result;
+		result = ft_strjoin(result, mini->env[i]);
+		free(tmp);
+		tmp = result;
+		result = ft_strjoin(result, "\n");
+		free(tmp);
 	}
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	t_mini *mini;
-
-	mini = malloc(sizeof(t_mini));
-	mini->env = env;
-	mini->argc = argc;
-	mini->argv = argv;
-	minishell(mini);
-	return (0);
+	return (result);
 }
