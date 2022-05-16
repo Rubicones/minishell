@@ -6,13 +6,13 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/04/25 16:49:38 by ejafer           ###   ########.fr        #
+#    Updated: 2022/03/28 20:34:27 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	minishell
+NAME	=	libminishell
 
-NAMES	=	minishell execute_line mini_env
+NAMES	=	
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
@@ -30,14 +30,9 @@ MD			=	mkdir -p
 
 all: ${NAME}
 
-libminishell.a:
-		$(MAKE) -C libminishell/
 
-libft.a:
-		$(MAKE) -C src/libft
-
-$(NAME): ${OBJ} Makefile | libminishell.a libft.a
-			$(CC) $(CFLAGS) $(OBJ) -L src/libft/ -lft -lreadline -o ${NAME}
+$(NAME): ${OBJ} Makefile 
+			$(AR) libminishell ${OBJ}
 
 $(OBJ_DIR):
 			${MD} $(OBJ_DIR)

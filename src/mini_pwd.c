@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   mini_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  <>                                        +#+  +:+       +#+        */
+/*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 18:22:01 by                   #+#    #+#             */
-/*   Updated: 2021/10/22 18:22:01 by                  ###   ########.fr       */
+/*   Created: 2022/04/25 16:03:57 by ejafer            #+#    #+#             */
+/*   Updated: 2022/04/25 16:25:22 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	*ft_memchr(const void *arr, int c, size_t n)
+char *mini_pwd(void)
 {
-	unsigned char	*arr1;
-	size_t			i;
-
-	i = 0;
-	arr1 = (unsigned char *)arr;
-	while (i < n)
-	{
-		if (arr1[i] == (unsigned char)c)
-			return (&arr1[i]);
-		i++;
-	}
-	return (NULL);
+	return (get_envvar('PWD'));
 }

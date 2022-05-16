@@ -1,27 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   mini_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  <>                                        +#+  +:+       +#+        */
+/*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 18:23:02 by                   #+#    #+#             */
-/*   Updated: 2021/10/22 18:23:02 by                  ###   ########.fr       */
+/*   Created: 2022/04/25 16:03:53 by ejafer            #+#    #+#             */
+/*   Updated: 2022/04/25 16:10:33 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-void	*ft_memset(void *a, int b, size_t c)
-{
-	long unsigned int		count;
-	char					*a1;
-
-	a1 = (char *)a;
-	count = 0;
-	while (count < c)
-	{
-		a1[count] = b;
-		count++;
-	}
-	return (a);
-}
+#include "minishell.h"
