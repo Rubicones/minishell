@@ -1,36 +1,38 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/04/25 17:15:02 by ejafer           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+//
+// Created by rubicon on 29.04.2022.
+//
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MINISHELL
+# define MINISHELL
 
 # include <unistd.h>
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+//# include <readline/readline.h>
+//# include <readline/history.h>
 # include <string.h>
 # include <signal.h>
 # include <stdlib.h>
+# include "../src/libft/libft.h"
 
-typedef struct s_mini
+# define TEXT 1
+# define HEREDOC 2 // <<
+# define PIPE 3 // |
+# define APPEND 4 // >>
+# define REDIR_IN 5 // <
+# define REDIR_OUT 6 // >
+
+char	**ft_split_ppx(char *str, char c);
+
+typedef struct s_split
 {
-	int		argc;
-	char	**argv;
-	char	**env;
-	char	**tokens;
-	char	*line;
-}	t_mini;
-
-void	execute_line(t_mini *mini);
-char	*mini_env(t_mini *mini);
+	char	**big_str;
+	int		k;
+	int		word_counter;
+	int		len;
+	char	*str;
+	char	c;
+	int		i;
+	int		j;
+}				t_split;
 
 #endif
