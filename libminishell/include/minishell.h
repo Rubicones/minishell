@@ -21,8 +21,6 @@
 # define REDIR_IN 5 // <
 # define REDIR_OUT 6 // >
 
-char	**ft_split_ppx(char *str, char c);
-
 typedef struct s_split
 {
 	char	**big_str;
@@ -34,5 +32,11 @@ typedef struct s_split
 	int		i;
 	int		j;
 }				t_split;
+
+char	**ft_split_quotes(char *str, char c);
+void	word_counter(char *str, char c, t_split *s);
+char ***primary_check(int argc, char **argv);
+
+
 
 #endif

@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-void	word_counter_ppx(char *str, char c, t_split *s);
+void	word_counter(char *str, char c, t_split *s);
 
 static void	split_init(char *str, char c, t_split *s)
 {
@@ -10,9 +10,9 @@ static void	split_init(char *str, char c, t_split *s)
 	s->c = c;
 	s->len = ft_strlen(str);
 	s->word_counter = 0;
-	word_counter_ppx(str, c, s);
-	s->i = 0; //?
-	s->j = 0; //?
+	word_counter(str, c, s);
+	s->i = 0;
+	s->j = 0;
 	s->k = 0;
 }
 
@@ -57,7 +57,7 @@ static void	quote_condition(t_split *s, int case_flag)
 		s->i = s->j;
 }
 
-void	word_counter_ppx(char *str, char c, t_split *s)
+void	word_counter(char *str, char c, t_split *s)
 {
 	while (s->i < s->len)
 	{
@@ -74,7 +74,7 @@ void	word_counter_ppx(char *str, char c, t_split *s)
 	}
 }
 
-char	**ft_split_ppx(char *str, char c)
+char	**ft_split_quotes(char *str, char c)
 {
 	t_split	s;
 

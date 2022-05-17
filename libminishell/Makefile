@@ -6,13 +6,13 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/03/28 20:34:27 by ejafer           ###   ########.fr        #
+#   Updated: 2022/05/17 14:36:24 by                  ###   ########.fr       # #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libminishell
 
-NAMES	=	
+NAMES	= lexer ft_split_quotes
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
