@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 19:20:31 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/03 21:57:17 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/03 22:30:34 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void	parse_to_cmds(t_mini *data)
 		{
 			if (is_heredoc(words[i]) && ++i)
 				heredoc_process(cmd, words[i]);
-			if (is_redirin(words[i]) && ++i)
+			else if (is_redirin(words[i]) && ++i)
 				cmd_change_cin(cmd, words[i]);
 			else if (is_redirout(words[i]) && ++i)
 				cmd_change_cout(cmd, words[i]);
