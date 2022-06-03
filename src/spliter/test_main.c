@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   test_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 20:35:09 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/03 21:41:15 by ejafer           ###   ########.fr       */
+/*   Created: 2022/06/03 19:08:12 by ejafer            #+#    #+#             */
+/*   Updated: 2022/06/03 19:08:18 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "libft.h"
 
-void	minishell(t_mini *mini)
+int	main(int argc, char **argv)
 {
-	while (1)
-	{
-		mini->line = readline("\033[32mMinishell\033[0m$: ");
-		add_history(mini->line);
-		split_line(mini);
-		parse_to_cmds(mini);
-		execute_cmds(mini);
-		free(mini->line);
-		mini->line = NULL;
-	}
-}
+	int		i;
+	t_mini	*data;
 
-int	main(int argc, char **argv, char **env)
-{
-	t_mini *mini;
-
-	mini = malloc(sizeof(t_mini));
-	mini->env = env;
-	mini->argc = argc;
-	mini->argv = argv;
-	minishell(mini);
+	if (argc != 2)
+		return (0);
+	data = malloc(sizeof(t_mini) * 1);
+	data->line = argv[1];
+	ms_splitline(data);
+	i = -1;
+	while (data->splited_line[++i])
+		ft_printf("%s\n", data->splited_line[i]);
 	return (0);
 }

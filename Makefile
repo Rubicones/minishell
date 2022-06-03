@@ -6,13 +6,13 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/04/25 16:49:38 by ejafer           ###   ########.fr        #
+#    Updated: 2022/06/03 21:55:07 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 
-NAMES	=	minishell execute_line mini_env
+NAMES	=	minishell parser/parse_to_cmds spliter/split_line execute_cmds
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/

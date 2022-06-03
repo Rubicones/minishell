@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_echo.c                                        :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 16:03:51 by ejafer            #+#    #+#             */
-/*   Updated: 2022/04/25 17:16:48 by ejafer           ###   ########.fr       */
+/*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
+/*   Updated: 2022/04/26 18:04:31 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.a"
+#include "libft.h"
 
-char	*mini_echo(int flag, char *str)
+int	executor(t_mini *mini)
 {
 	
 }
