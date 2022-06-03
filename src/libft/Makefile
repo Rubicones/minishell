@@ -5,14 +5,33 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#   Updated: 2022/05/17 14:36:24 by                  ###   ########.fr       # #
+#    Created: 2021/10/15 20:15:28 by ejafer            #+#    #+#              #
+#    Updated: 2022/06/03 18:16:50 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	libminishell
+NAME	=	libft.a
 
-NAMES	= lexer ft_split_quotes
+HDR		= 	libft.h
+
+NAMES	=	ft_atoi			ft_bzero		ft_calloc\
+			ft_isalnum		ft_isalpha		ft_isascii\
+			ft_isdigit		ft_isprint		ft_itoa\
+			ft_memchr		ft_memcmp		ft_memcpy\
+			ft_memmove		ft_memset		ft_putchar_fd\
+			ft_putendl_fd	ft_putnbr_fd	ft_putstr_fd\
+			ft_split		ft_strchr		ft_strdup\
+			ft_striteri		ft_strjoin		ft_strlcat\
+			ft_strlcpy		ft_strlen		ft_strmapi\
+			ft_strncmp		ft_strnstr		ft_nbrlen\
+			ft_strrchr		ft_strtrim		ft_substr\
+			ft_tolower		ft_toupper		ft_memccpy\
+			ft_lstnew		ft_lstadd_front	ft_lstsize\
+			ft_lstlast		ft_lstadd_back	ft_lstclear\
+			ft_lstiter		ft_lstmap		ft_lstdelone\
+			ft_printf 		ft_format_str	ft_format_int\
+			ft_format_hex	ft_add_width	ft_add_precision_nbr\
+			ft_unbr_to_base get_next_line	ft_arrlen
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
@@ -30,9 +49,8 @@ MD			=	mkdir -p
 
 all: ${NAME}
 
-
-$(NAME): ${OBJ} Makefile 
-			$(AR) libminishell ${OBJ}
+$(NAME): ${OBJ}
+			$(AR) ${NAME} ${OBJ}
 
 $(OBJ_DIR):
 			${MD} $(OBJ_DIR)
