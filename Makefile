@@ -6,7 +6,7 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/06/03 21:55:07 by ejafer           ###   ########.fr        #
+#    Updated: 2022/06/03 22:15:04 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,10 @@ MD			=	mkdir -p
 
 all: ${NAME}
 
-libminishell.a:
-		$(MAKE) -C libminishell/
-
 libft.a:
 		$(MAKE) -C src/libft
 
-$(NAME): ${OBJ} Makefile | libminishell.a libft.a
+$(NAME): ${OBJ} Makefile | libft.a
 			$(CC) $(CFLAGS) $(OBJ) -L src/libft/ -lft -lreadline -o ${NAME}
 
 $(OBJ_DIR):
