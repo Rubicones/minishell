@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_cmds.c                                     :+:      :+:    :+:   */
+/*   process_word.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 15:48:36 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/03 21:40:59 by ejafer           ###   ########.fr       */
+/*   Created: 2022/06/07 17:51:41 by ejafer            #+#    #+#             */
+/*   Updated: 2022/06/07 18:01:48 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "spliter.h"
 #include "libft.h"
 
-void	execute_cmds(t_mini *mini)
+void	process_word(t_split_data *data)
 {
-	t_cmd *current;
+	char	*word;
 
-	current = *mini->cmds;
-	while (current)
+	word = ft_strnew(0);
+	while (current_letter(data) && current_letter_is_separator(data) == 0)
 	{
-		printf("command name: %s\n", current->name);
-		current = current->next;
+		word = ft_str_addletter(word, current_letter(data));
+		data->index++;
 	}
-	//тут следует почистить структуру комманд
-	*mini->cmds = NULL;
+		data->words = ft_arr_addback(data->words, word);
 }

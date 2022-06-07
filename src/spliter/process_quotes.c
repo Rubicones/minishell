@@ -6,12 +6,13 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:47:49 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 17:02:57 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/07 18:04:20 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "spliter.h"
 #include "minishell.h"
+#include "libft.h"
 
 int	current_letter_is_quotes(t_split_data *data)
 {
@@ -25,13 +26,17 @@ int	current_letter_is_quotes(t_split_data *data)
 
 void	process_quotes(t_split_data *data)
 {
+	char	*word;
 	char	openquoute;
 
 	openquoute = current_letter(data);
+	word = ft_strnew(0);
 	data->index++;
 	while (current_letter(data) && current_letter(data) != openquoute)
 	{
-		add_letter_to_current_word(data);
+		word = ft_str_addletter(word, current_letter(data));
 		data->index++;
 	}
+	data->words = ft_arr_addback(data->words, word);
+	data->index++;
 }

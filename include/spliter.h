@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:00:37 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 17:04:36 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/07 18:02:35 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,14 @@ typedef struct s_split_data
 {
 	char	*line;
 	int		index;
-	char	*current_word;
 	char	**words;
 }	t_split_data;
 
 t_split_data	*new_split_data(char *line);
 char			current_letter(t_split_data	*data);
-void			add_letter_to_current_word(t_split_data	*data);
-void			add_curent_word_to_words(t_split_data *data);
 int				current_letter_is_separator(t_split_data *data);
 int				current_letter_is_quotes(t_split_data *data);
+void			process_word(t_split_data *data);
 void			process_separator(t_split_data *data);
 void			process_quotes(t_split_data *data);
 

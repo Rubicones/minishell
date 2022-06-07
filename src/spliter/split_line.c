@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_line2.c                                      :+:      :+:    :+:   */
+/*   split_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:32:19 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 17:05:00 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/07 17:57:05 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@ void	split_line(t_mini *mini)
 	while (current_letter(data))
 	{
 		if (current_letter_is_separator(data))
-		{
-			add_curent_word_to_words(data);
 			process_separator(data);
-		}
-		else if (current_word_is_quotes(data))
+		else if (current_letter_is_quotes(data))
 			process_quotes(data);
 		else
-			add_letter_to_current_word(data);
+			process_word(data);
 	}
 	mini->splited_line = data->words;
 	free(data);
