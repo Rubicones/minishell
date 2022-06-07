@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 16:22:35 by ejafer            #+#    #+#             */
-/*   Updated: 2021/10/14 17:08:48 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/07 16:34:43 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ char	*ft_strdup(const char *s)
 
 	tmp = (char *) malloc(sizeof(char) * slen + 1);
 	if (tmp == NULL)
-	{
 		return (NULL);
-	}
 	ft_memcpy(tmp, s, slen + 1);
 	return (tmp);
 }

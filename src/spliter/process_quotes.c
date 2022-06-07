@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_line2.c                                      :+:      :+:    :+:   */
+/*   process_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/07 15:32:19 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 17:05:00 by ejafer           ###   ########.fr       */
+/*   Created: 2022/06/07 16:47:49 by ejafer            #+#    #+#             */
+/*   Updated: 2022/06/07 17:02:57 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "spliter.h"
 #include "minishell.h"
-#include "libft.h"
 
-void	split_line(t_mini *mini)
+int	current_letter_is_quotes(t_split_data *data)
 {
-	t_split_data	*data;
+	char	c;
 
-	data = new_split_data(mini->line);
-	while (current_letter(data))
+	c = current_letter(data);
+	if (c == QUOTES_D || c == QUOTES_S)
+		return (1);
+	return (0);
+}
+
+void	process_quotes(t_split_data *data)
+{
+	char	openquoute;
+
+	openquoute = current_letter(data);
+	data->index++;
+	while (current_letter(data) && current_letter(data) != openquoute)
 	{
-		if (current_letter_is_separator(data))
-		{
-			add_curent_word_to_words(data);
-			process_separator(data);
-		}
-		else if (current_word_is_quotes(data))
-			process_quotes(data);
-		else
-			add_letter_to_current_word(data);
+		add_letter_to_current_word(data);
+		data->index++;
 	}
-	mini->splited_line = data->words;
-	free(data);
 }

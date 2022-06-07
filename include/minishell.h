@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 15:23:57 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/07 17:00:18 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 
 # define QUOTES_D	'"'
 # define QUOTES_S	'\''
-# define PIPE		'|'
 # define SPACE		' '
 
 # define HEREDOC	"<<"
 # define REDERIN	"<"
 # define REDEROUT	">"
 # define REDEROUT_A ">>"
+# define PIPE		"|"
 
 typedef struct s_cmd
 {
