@@ -3,4 +3,6 @@
 minishell
 src/spliter/test_main.c
 a.out
-file*
+file1
+file2
+file3
