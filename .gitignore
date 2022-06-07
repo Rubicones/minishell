@@ -1,9 +1,6 @@
 *.0
 *.d
-<<<<<<< HEAD
-Minishell
-src/parser/test_main.c
-a.out
-=======
 minishell
->>>>>>> 8ae1649ed0922ca8f921314d5d6ed8a695d50d5c
+src/spliter/test_main.c
+a.out
+file*

@@ -6,13 +6,13 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/06/03 22:15:04 by ejafer           ###   ########.fr        #
+#    Updated: 2022/06/07 15:23:37 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 
-NAMES	=	minishell parser/parse_to_cmds spliter/split_line execute_cmds
+NAMES	=	minishell parser/parse_to_cmds spliter/split_line execute_cmds error/throw_error
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/

@@ -6,7 +6,7 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 20:15:28 by ejafer            #+#    #+#              #
-#    Updated: 2022/06/03 18:16:50 by ejafer           ###   ########.fr        #
+#    Updated: 2022/06/07 14:46:05 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ NAMES	=	ft_atoi			ft_bzero		ft_calloc\
 			ft_lstiter		ft_lstmap		ft_lstdelone\
 			ft_printf 		ft_format_str	ft_format_int\
 			ft_format_hex	ft_add_width	ft_add_precision_nbr\
-			ft_unbr_to_base get_next_line	ft_arrlen
+			ft_unbr_to_base get_next_line	ft_arrnew\
+			ft_arrlen		ft_arr_addback  ft_strnew\
+			ft_str_addletter
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/

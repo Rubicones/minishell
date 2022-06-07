@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/03 21:35:37 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/07 15:23:57 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 # include <signal.h>
 # include <stdlib.h>
 # include <fcntl.h>
+
+# define QUOTES_D	'"'
+# define QUOTES_S	'\''
+# define PIPE		'|'
+# define SPACE		' '
+
+# define HEREDOC	"<<"
+# define REDERIN	"<"
+# define REDEROUT	">"
+# define REDEROUT_A ">>"
 
 typedef struct s_cmd
 {
@@ -45,5 +55,6 @@ void	split_line(t_mini *mini);
 void	parse_to_cmds(t_mini *mini);
 void	execute_cmds(t_mini *mini);
 char	*mini_env(t_mini *mini);
+void	throw_error(int error_code);
 
 #endif

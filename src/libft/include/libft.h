@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:52:41 by ejafer            #+#    #+#             */
-/*   Updated: 2022/03/23 17:11:40 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/07 14:47:25 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
+char	*ft_strnew(int len);
+char	*ft_str_addletter(char *old_str, char letter);
 int		ft_strlen(const char *str);
 int		ft_nbrlen(long nbr);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -59,6 +61,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+
+char	**ft_arrnew(int len);
+int		ft_arrlen(char **array);
+char	**ft_arr_addback(char **old_array, char *word);
 
 void	*ft_calloc(size_t nmemb, size_t size);
 
