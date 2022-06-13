@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:12:23 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/13 16:47:06 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/13 19:25:37 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_token	*new_token(char	*new_name, t_type new_type)
 	tmp = malloc(sizeof(t_token) * 1);
 	tmp->name = new_name;
 	tmp->type = new_type;
-	tmp->argv = ft_arrnew(0);
+	tmp->argv = ft_arrnew(1);
+	tmp->argv[0] = new_name;
 	tmp->next = NULL;
 	return (tmp);
 }

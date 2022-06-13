@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/13 16:24:16 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/13 19:28:07 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 # include <string.h>
 # include <signal.h>
 # include <stdlib.h>
@@ -35,9 +36,9 @@
 typedef enum e_type
 {
 	Heredoc,
-	Rederin,
-	Rederout,
-	Rederout_a,
+	Redirin,
+	Redirout,
+	Redirout_a,
 	Pipe,
 	Command
 }	t_type;
@@ -69,11 +70,19 @@ typedef struct s_parser
 	t_token			**head;
 }	t_parser;
 
+typedef struct s_command
+{
+	char	*name;
+	char	**argv;
+	int		fdin;
+	int		fdout;
+}	t_command;
+
 void		split_line(t_mini *mini);
-void		parse_to_cmds(t_mini *mini);
 void		execute_cmds(t_mini *mini);
 char		*mini_env(t_mini *mini);
 void		throw_error(int error_code);
+int			executor(t_mini *mini);
 
 t_token		*new_token(char	*new_name, t_type new_type);
 void		token_push_back(t_token **head, t_token *to_push);

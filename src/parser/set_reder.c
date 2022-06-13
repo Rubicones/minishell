@@ -22,13 +22,12 @@ void	set_reder(t_parser *data)
 	if (is_heredoc(word))
 		reder_token = new_token(word, Heredoc);
 	else if (is_rederin(word))
-		reder_token = new_token(word, Rederin);
+		reder_token = new_token(word, Redirin);
 	else if (is_rederout(word))
-		reder_token = new_token(word, Rederout);
+		reder_token = new_token(word, Redirout);
 	else
-		reder_token = new_token(word, Rederout_a);
+		reder_token = new_token(word, Redirout_a);
 	data->index++;
-	reder_token->argv = ft_arrnew(0);
 	reder_token->argv = ft_arr_addback(reder_token->argv, current_word(data));
 	token_push_back(data->head, reder_token);
 	data->index++;
