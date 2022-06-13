@@ -6,14 +6,13 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:51 by ejafer            #+#    #+#             */
-/*   Updated: 2022/04/26 18:07:19 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/13 17:06:10 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.a"
 
-char	*mini_echo(t_mini *mini)
+char	*mini_echo(t_mini *mini, char *argv)
 {
 
 }

@@ -13,7 +13,7 @@
 #include "minishell.h"
 #include "libft.h"
 
-char *mini_env(t_mini *mini)
+char	*mini_env(t_mini *mini)
 {
 	char	*result;
 	char	*tmp;

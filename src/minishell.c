@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:35:09 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/13 16:16:15 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/13 16:50:50 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 // ТЕСТОВАЯ ФУНКЦИЯ
 void	execute_cmds(t_mini *mini)
 {
+	int		i;
 	t_token	*current;
 
 	current = *mini->tokens;
 	while (current)
 	{
-		printf("command name: %s\n", current->name);
+		printf("Token: %s; type: %d; argv: ", current->name, current->type);
+		i = -1;
+		while (current->argv[++i])
+			printf("%s ", current->argv[i]);
+		printf("\n");
 		current = current->next;
 	}
 	*mini->tokens = NULL;
@@ -31,11 +36,11 @@ void	show_splited_line(t_mini *mini)
 {
 	int	i;
 
-	printf("_____\n");
+	printf("Splited line:\n");
 	i = -1;
 	while (mini->splited_line[++i])
 		printf("%s\n", mini->splited_line[i]);
-	printf("_____\n");
+	printf("\n");
 }
 
 void	minishell(t_mini *mini)
