@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   is_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 18:53:19 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 18:23:02 by ejafer           ###   ########.fr       */
+/*   Created: 2022/06/13 16:19:49 by ejafer            #+#    #+#             */
+/*   Updated: 2022/06/13 16:21:51 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *item)
+int	is_pipe(t_parser *data)
 {
-	if (item == NULL || lst == NULL)
-		return ;
-	item->next = *lst;
-	*lst = item;
+	char	*word;
+
+	word = current_word(data);
+	if (ft_strlen(word) == ft_strlen(PIPE)
+		&& ft_strncmp(word, PIPE, ft_strlen(PIPE)) == 0)
+		return (1);
+	return (0);
 }

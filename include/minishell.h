@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 17:00:18 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/13 16:24:16 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,23 @@
 # define REDEROUT_A ">>"
 # define PIPE		"|"
 
-typedef struct s_cmd
+typedef enum e_type
+{
+	Heredoc,
+	Rederin,
+	Rederout,
+	Rederout_a,
+	Pipe,
+	Command
+}	t_type;
+
+typedef struct s_token
 {
 	char			*name;
-	int				cin;
-	int				cout;
+	t_type			type;
 	char			**argv;
-	struct s_cmd	*next;
-}	t_cmd;
+	struct s_token	*next;
+}	t_token;
 
 typedef struct s_mini
 {
@@ -48,13 +57,39 @@ typedef struct s_mini
 	char	**env;
 	char	*line;
 	char	**splited_line;
-	void	**cmds;
+	t_token	**tokens;
 }	t_mini;
 
-void	split_line(t_mini *mini);
-void	parse_to_cmds(t_mini *mini);
-void	execute_cmds(t_mini *mini);
-char	*mini_env(t_mini *mini);
-void	throw_error(int error_code);
+typedef struct s_parser
+{
+	char			**words;
+	int				command_is_set;
+	int				index;
+	t_token			*current_command;
+	t_token			**head;
+}	t_parser;
+
+void		split_line(t_mini *mini);
+void		parse_to_cmds(t_mini *mini);
+void		execute_cmds(t_mini *mini);
+char		*mini_env(t_mini *mini);
+void		throw_error(int error_code);
+
+t_token		*new_token(char	*new_name, t_type new_type);
+void		token_push_back(t_token **head, t_token *to_push);
+
+void		parse(t_mini *mini);
+t_parser	*new_parser(char **words);
+char		*current_word(t_parser *data);
+int			is_command_set(t_parser *data);
+int			is_pipe(t_parser *data);
+int			is_reder(t_parser *data);
+int			is_heredoc(char	*word);
+int			is_rederin(char	*word);
+int			is_rederout(char *word);
+int			is_rederout_a(char *word);
+void		set_reder(t_parser *data);
+void		set_pipe(t_parser *data);
+void		set_command(t_parser *data);
 
 #endif

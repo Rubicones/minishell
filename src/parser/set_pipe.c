@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   set_pipe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 18:53:19 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 18:23:02 by ejafer           ###   ########.fr       */
+/*   Created: 2022/06/13 16:05:42 by ejafer            #+#    #+#             */
+/*   Updated: 2022/06/13 16:06:11 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *item)
+void	set_pipe(t_parser *data)
 {
-	if (item == NULL || lst == NULL)
-		return ;
-	item->next = *lst;
-	*lst = item;
+	t_token	*pipe_token;
+
+	pipe_token = new_token(current_word(data), Pipe);
+	token_push_back(data->head, pipe_token);
+	data->current_command = NULL;
+	data->command_is_set = 0;
+	data->index++;
 }

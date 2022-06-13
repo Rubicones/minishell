@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:35:09 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 18:03:52 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/13 16:16:15 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 // ТЕСТОВАЯ ФУНКЦИЯ
 void	execute_cmds(t_mini *mini)
 {
-	t_cmd	*current;
+	t_token	*current;
 
-	current = *mini->cmds;
+	current = *mini->tokens;
 	while (current)
 	{
 		printf("command name: %s\n", current->name);
 		current = current->next;
 	}
-	*mini->cmds = NULL;
+	*mini->tokens = NULL;
 }
 
 // ТЕСТОВАЯ ФУНКЦИЯ
@@ -35,6 +35,7 @@ void	show_splited_line(t_mini *mini)
 	i = -1;
 	while (mini->splited_line[++i])
 		printf("%s\n", mini->splited_line[i]);
+	printf("_____\n");
 }
 
 void	minishell(t_mini *mini)
@@ -45,8 +46,8 @@ void	minishell(t_mini *mini)
 		add_history(mini->line);
 		split_line(mini);
 		show_splited_line(mini); //тестовая функция
-		//parse_to_cmds(mini);
-		//execute_cmds(mini); //тестовая функция
+		parse(mini);
+		execute_cmds(mini); //тестовая функция
 		free(mini->line);
 		mini->line = NULL;
 	}
@@ -54,7 +55,7 @@ void	minishell(t_mini *mini)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_mini *mini;
+	t_mini	*mini;
 
 	mini = malloc(sizeof(t_mini));
 	mini->env = env;
