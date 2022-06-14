@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:10:25 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 17:44:08 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/14 14:08:17 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	current_letter_is_separator(t_split_data *data)
 	char	c;
 
 	c = data->line[data->index];
-	if (c == REDERIN[0] || c == REDEROUT[0] || c == PIPE[0] || c == SPACE)
+	if (c == REDIRIN[0] || c == REDIROUT[0] || c == PIPE[0] || c == SPACE)
 		return (1);
 	return (0);
 }
@@ -42,12 +42,12 @@ void	process_separator(t_split_data *data)
 	line = data->line;
 	if (ft_strncmp(HEREDOC, line + i, ft_strlen(HEREDOC)) == 0)
 		words_add(HEREDOC, data);
-	else if (ft_strncmp(REDERIN, line + i, ft_strlen(REDERIN)) == 0)
-		words_add(REDERIN, data);
-	else if (ft_strncmp(REDEROUT_A, line + i, ft_strlen(REDEROUT_A)) == 0)
-		words_add(REDEROUT_A, data);
-	else if (ft_strncmp(REDEROUT, line + i, ft_strlen(REDEROUT)) == 0)
-		words_add(REDEROUT, data);
+	else if (ft_strncmp(REDIRIN, line + i, ft_strlen(REDIRIN)) == 0)
+		words_add(REDIRIN, data);
+	else if (ft_strncmp(REDIROUT_A, line + i, ft_strlen(REDIROUT_A)) == 0)
+		words_add(REDIROUT_A, data);
+	else if (ft_strncmp(REDIROUT, line + i, ft_strlen(REDIROUT)) == 0)
+		words_add(REDIROUT, data);
 	else if (ft_strncmp(PIPE, line + i, ft_strlen(PIPE)) == 0)
 		words_add(PIPE, data);
 	else

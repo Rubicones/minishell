@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_reder.c                                         :+:      :+:    :+:   */
+/*   is_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:43:17 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/13 16:22:20 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/14 14:09:42 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,39 @@ int	is_heredoc(char	*word)
 	return (0);
 }
 
-int	is_rederin(char	*word)
+int	is_redirin(char	*word)
 {
-	if (ft_strlen(word) == ft_strlen(REDERIN)
-		&& ft_strncmp(word, REDERIN, ft_strlen(REDERIN)) == 0)
+	if (ft_strlen(word) == ft_strlen(REDIRIN)
+		&& ft_strncmp(word, REDIRIN, ft_strlen(REDIRIN)) == 0)
 		return (1);
 	return (0);
 }
 
-int	is_rederout(char	*word)
+int	is_redirout(char	*word)
 {
-	if (ft_strlen(word) == ft_strlen(REDEROUT)
-		&& ft_strncmp(word, REDEROUT, ft_strlen(REDEROUT)) == 0)
+	if (ft_strlen(word) == ft_strlen(REDIROUT)
+		&& ft_strncmp(word, REDIROUT, ft_strlen(REDIROUT)) == 0)
 		return (1);
 	return (0);
 }
 
-int	is_rederout_a(char	*word)
+int	is_redirout_a(char	*word)
 {
-	if (ft_strlen(word) == ft_strlen(REDEROUT_A)
-		&& ft_strncmp(word, REDEROUT_A, ft_strlen(REDEROUT_A)) == 0)
+	if (ft_strlen(word) == ft_strlen(REDIROUT_A)
+		&& ft_strncmp(word, REDIROUT_A, ft_strlen(REDIROUT_A)) == 0)
 		return (1);
 	return (0);
 }
 
-int	is_reder(t_parser *data)
+int	is_redir(t_parser *data)
 {
 	char	*word;
 
 	word = current_word(data);
 	if (is_heredoc(word)
-		|| is_rederin(word)
-		|| is_rederout(word)
-		|| is_rederout_a(word))
+		|| is_redirin(word)
+		|| is_redirout(word)
+		|| is_redirout_a(word))
 		return (1);
 	return (0);
 }

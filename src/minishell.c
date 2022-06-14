@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:35:09 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/13 20:43:02 by                  ###   ########.fr       */
+/*   Updated: 2022/06/14 14:07:20 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ void	minishell(t_mini *mini)
 		mini->line = readline("\033[32mMinishell\033[0m$: ");
 		add_history(mini->line);
 		split_line(mini);
-		//show_splited_line(mini); //тестовая функция
 		parse(mini);
-		executor(mini); //тестовая функция
+		execute(mini);
 		free(mini->line);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/06/14 13:22:09 by ejafer           ###   ########.fr        #
+#    Updated: 2022/06/14 14:09:30 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ NAMES	=	minishell\
 			spliter/split_line	spliter/process_separator	spliter/process_quotes\
 			spliter/split_data	spliter/process_word\
 			parser/parse		parser/parser_data			parser/token\
-			parser/set_command	parser/set_pipe				parser/set_reder\
-			parser/is_reder		parser/is_pipe\
+			parser/set_command	parser/set_pipe				parser/set_redir\
+			parser/is_redir		parser/is_pipe\
 			executor/executor	executor/command			executor/open_redir\
 			error/throw_error\
 

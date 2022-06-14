@@ -6,14 +6,14 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 16:04:40 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/13 16:25:52 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/14 14:05:02 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-void	set_reder(t_parser *data)
+void	set_redir(t_parser *data)
 {
 	t_token	*reder_token;
 	char	*word;
@@ -21,9 +21,9 @@ void	set_reder(t_parser *data)
 	word = current_word(data);
 	if (is_heredoc(word))
 		reder_token = new_token(word, Heredoc);
-	else if (is_rederin(word))
+	else if (is_redirin(word))
 		reder_token = new_token(word, Redirin);
-	else if (is_rederout(word))
+	else if (is_redirout(word))
 		reder_token = new_token(word, Redirout);
 	else
 		reder_token = new_token(word, Redirout_a);

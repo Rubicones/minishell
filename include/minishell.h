@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 13:30:22 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/14 14:10:12 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 # define SPACE		' '
 
 # define HEREDOC	"<<"
-# define REDERIN	"<"
-# define REDEROUT	">"
-# define REDEROUT_A ">>"
+# define REDIRIN	"<"
+# define REDIROUT	">"
+# define REDIROUT_A ">>"
 # define PIPE		"|"
 
 typedef enum e_type
@@ -72,7 +72,7 @@ typedef struct s_parser
 
 void		split_line(t_mini *mini);
 void		parse(t_mini *mini);
-void		executor(t_mini *mini);
+void		execute(t_mini *mini);
 char		*mini_env(t_mini *mini);
 void		throw_error(int error_code);
 
@@ -83,12 +83,12 @@ t_parser	*new_parser(char **words);
 char		*current_word(t_parser *data);
 int			is_command_set(t_parser *data);
 int			is_pipe(t_parser *data);
-int			is_reder(t_parser *data);
+int			is_redir(t_parser *data);
 int			is_heredoc(char	*word);
-int			is_rederin(char	*word);
-int			is_rederout(char *word);
-int			is_rederout_a(char *word);
-void		set_reder(t_parser *data);
+int			is_redirin(char	*word);
+int			is_redirout(char *word);
+int			is_redirout_a(char *word);
+void		set_redir(t_parser *data);
 void		set_pipe(t_parser *data);
 void		set_command(t_parser *data);
 

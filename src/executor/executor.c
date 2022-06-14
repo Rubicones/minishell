@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 14:03:16 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/14 14:06:55 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	parent_process(t_mini *mini, t_token *token)
 	while ((wpid = waitpid(-1, NULL, 0)) > 0);
 }
 
-void	executor(t_mini *mini)
+void	execute(t_mini *mini)
 {
 	t_token	*cur_tokens;
 
