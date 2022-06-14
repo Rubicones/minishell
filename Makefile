@@ -6,7 +6,7 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#   Updated: 2022/06/13 19:13:19 by                  ###   ########.fr       # #
+#    Updated: 2022/06/14 13:22:09 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ NAMES	=	minishell\
 			parser/parse		parser/parser_data			parser/token\
 			parser/set_command	parser/set_pipe				parser/set_reder\
 			parser/is_reder		parser/is_pipe\
+			executor/executor	executor/command			executor/open_redir\
 			error/throw_error\
-			executor/executor
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
@@ -30,7 +30,7 @@ OBJ			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(NAMES)))
 D_FILES		=	$(addprefix $(OBJ_DIR), $(addsuffix .d, $(NAMES)))
 
 CC			=	cc
-CFLAGS		=	-O3
+CFLAGS		=	-Wall -Wextra -Werror -O3
 AR			=   ar rcs
 
 MD			=	mkdir -p

@@ -6,14 +6,15 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/13 21:13:50 by                  ###   ########.fr       */
+/*   Updated: 2022/06/14 14:03:16 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include "../../include/libft.h"
+#include "minishell.h"
+#include "executor.h"
+#include "libft.h"
 
-char *find_path(t_mini *mini, char *name)
+char	*find_path(t_mini *mini, char *name)
 {
 	char	**paths;
 	char	*path;
@@ -21,7 +22,7 @@ char *find_path(t_mini *mini, char *name)
 	char	*part_path;
 
 	i = 0;
-	while (ft_strnstr(mini->env[i], "PATH", 4))
+	while (ft_strnstr(mini->env[i], "PATH=", 5))
 		i++;
 	paths = ft_split(mini->env[i] + 5, ':');
 	i = 0;
@@ -42,7 +43,31 @@ char *find_path(t_mini *mini, char *name)
 	return (NULL);
 }
 
-void child_process(t_mini *mini, t_command *cmd)
+void	dup_fdouts(int *fdout)
+{
+	int	i;
+
+	i = -1;
+	while (fdout[++i] != -1)
+	{
+		dup2(fdout[i], STDOUT_FILENO);
+		close(fdout[i]);
+	}
+}
+
+void	dup_fdins(int *fdin)
+{
+	int	i;
+
+	i = -1;
+	while (fdin[++i] != -1)
+	{
+		dup2(fdin[i], STDIN_FILENO);
+		close(fdin[i]);
+	}
+}
+
+void	child_process(t_mini *mini, t_command *cmd)
 {
 	pid_t	pid;
 	char	*path;
@@ -53,11 +78,9 @@ void child_process(t_mini *mini, t_command *cmd)
 		path = find_path(mini, cmd->name);
 		if (path == NULL)
 			exit(-1);
-		if (cmd->fdout != 1)
-		{
-			dup2(cmd->fdout, STDOUT_FILENO);
-			close(cmd->fdout);
-		}
+		dup_fdouts(cmd->fdout);
+		dup_fdins(cmd->fdin);
+		printf("%s\n", path);
 		if (execve(path, cmd->argv, mini->env) == -1)
 			exit(-1);
 	}
@@ -67,68 +90,44 @@ void child_process(t_mini *mini, t_command *cmd)
 	}
 	else
 	{
-		if (cmd->fdout != 1)
-			close(cmd->fdout);
+		close_fds(cmd);
+		free(cmd->fdin);
+		free(cmd->fdout);
+		free(cmd);
 	}
 }
 
-void heredoc_fun(char **envp, char *filename, t_command *cmd)
+void	parent_process(t_mini *mini, t_token *token)
 {
-	return ;
-}
+	int			fd[2];
+	int			wpid;
+	t_command	*cmd;
 
-void redir_in_fun(char **envp, char *filename, t_command *cmd)
-{
-	return ;
-}
-
-void redir_out_fun(char **envp, char *filename, t_command *cmd)
-{
-	int fd;
-
-	fd = open(filename, O_TRUNC | O_WRONLY | O_CREAT, 0664);
-	if (cmd->fdout != 1)
-		close(cmd->fdout);
-	cmd->fdout = fd;
-	return ;
-}
-
-t_command	*new_command(char *new_name)
-{
-	t_command	*tmp;
-
-	tmp = malloc(sizeof(t_command) * 1);
-	tmp->name = new_name;
-	tmp->argv = ft_arrnew(1);
-	tmp->argv[0] = new_name;
-	tmp->fdin = 0;
-	tmp->fdout = 1;
-	return (tmp);
-}
-
-void parent_process(t_mini *mini, t_token *token)
-{
-	int fd[2];
-	int wpid;
-	t_command *cmd;
-
-	cmd = new_command(token->name);
+	fd[0] = -1;
+	fd[1] = -1;
+	cmd = NULL;
 	while (token)
 	{
 		if (token->type == Heredoc)
-			heredoc_fun(mini->env, token->argv[1], cmd);
+			open_heredoc(token->argv[1], cmd);
 		else if (token->type == Redirin)
-			redir_in_fun(mini->env, token->argv[1], cmd);
+			open_redirin(token->argv[1], cmd);
 		else if (token->type == Redirout)
-			redir_out_fun(mini->env, token->argv[1], cmd);
+			open_redirout(token->argv[1], cmd);
+		else if (token->type == Redirout_a)
+			open_redirout_a(token->argv[1], cmd);
 		else if (token->type == Command)
 		{
-			cmd->name = token->name;
-			cmd->argv = token->argv;
+			cmd = new_command(token->name, token->argv);
+			if (fd[0] != -1)
+				cmd->fdin = arrint_addback(cmd->fdin, fd[0]);
 		}
 		else if (token->type == Pipe)
 		{
-			pipe(fd);
+			if (pipe(fd) == -1)
+				exit(-1);
+			if (fd[1] != -1)
+				cmd->fdout = arrint_addback(cmd->fdout, fd[1]);
 			child_process(mini, cmd);
 		}
 		token = token->next;
@@ -137,10 +136,9 @@ void parent_process(t_mini *mini, t_token *token)
 	while ((wpid = waitpid(-1, NULL, 0)) > 0);
 }
 
-
-int	executor(t_mini *mini)
+void	executor(t_mini *mini)
 {
-	t_token *cur_tokens;
+	t_token	*cur_tokens;
 
 	cur_tokens = *mini->tokens;
 	parent_process(mini, cur_tokens);
