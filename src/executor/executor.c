@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 14:06:55 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/14 15:20:52 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*find_path(t_mini *mini, char *name)
 	char	*part_path;
 
 	i = 0;
-	while (ft_strnstr(mini->env[i], "PATH=", 5))
+	while (ft_strncmp(mini->env[i], "PATH", 4))
 		i++;
 	paths = ft_split(mini->env[i] + 5, ':');
 	i = 0;
@@ -80,7 +80,6 @@ void	child_process(t_mini *mini, t_command *cmd)
 			exit(-1);
 		dup_fdouts(cmd->fdout);
 		dup_fdins(cmd->fdin);
-		printf("%s\n", path);
 		if (execve(path, cmd->argv, mini->env) == -1)
 			exit(-1);
 	}
