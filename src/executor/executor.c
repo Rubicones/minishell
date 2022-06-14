@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 15:20:52 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/14 15:44:59 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	child_process(t_mini *mini, t_command *cmd)
 		close_fds(cmd);
 		free(cmd->fdin);
 		free(cmd->fdout);
-		free(cmd);
+		cmd->fdin = arrint_new(0);
+		cmd->fdout = arrint_new(0);
 	}
 }
 
@@ -104,7 +105,7 @@ void	parent_process(t_mini *mini, t_token *token)
 
 	fd[0] = -1;
 	fd[1] = -1;
-	cmd = NULL;
+	cmd = new_command(0, NULL);;
 	while (token)
 	{
 		if (token->type == Heredoc)
@@ -117,7 +118,8 @@ void	parent_process(t_mini *mini, t_token *token)
 			open_redirout_a(token->argv[1], cmd);
 		else if (token->type == Command)
 		{
-			cmd = new_command(token->name, token->argv);
+			cmd->name = token->name;
+			cmd->argv = token->argv;
 			if (fd[0] != -1)
 				cmd->fdin = arrint_addback(cmd->fdin, fd[0]);
 		}
