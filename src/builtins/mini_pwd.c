@@ -14,5 +14,9 @@
 
 char *mini_pwd(void)
 {
-	return (get_envvar('PWD'));
+	char path[1000];
+
+	getcwd(path, sizeof(path));
+	printf("%s\n", path);
+	return (path);
 }

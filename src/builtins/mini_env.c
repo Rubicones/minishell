@@ -31,5 +31,6 @@ char	*mini_env(t_mini *mini)
 		result = ft_strjoin(result, "\n");
 		free(tmp);
 	}
+	printf("%s", result);
 	return (result);
 }

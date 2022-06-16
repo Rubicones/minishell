@@ -16,6 +16,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "minishell.h"
 
 typedef struct s_command
 {
@@ -31,10 +32,18 @@ void		close_fds(t_command *cmd);
 int			*arrint_new(int len);
 int			arrint_len(int *arr);
 int			*arrint_addback(int *old_arr, int new_elem);
+int			builtins_check(t_command *cmd);
 
+void		exec_builtin(t_mini *mini, t_command *cmd, char **argv);
 void		open_heredoc(char *filename, t_command *cmd);
 void		open_redirin(char *filename, t_command *cmd);
 void		open_redirout(char *filename, t_command *cmd);
 void		open_redirout_a(char *filename, t_command *cmd);
+
+void		mini_echo(t_command *cmd, char **argv);
+void		mini_cd(t_command *cmd, char **argv);
+char		*mini_pwd(void);
+
+
 
 #endif
