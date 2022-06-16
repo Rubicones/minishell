@@ -80,7 +80,9 @@ void	child_process(t_mini *mini, t_command *cmd)
 			exit(-1);
 		dup_fdouts(cmd->fdout);
 		dup_fdins(cmd->fdin);
-		if (execve(path, cmd->argv, mini->env) == -1)
+		if (builtins_check(cmd) == 1)
+			exec_builtin(mini, cmd, cmd->argv);
+		else if (execve(path, cmd->argv, mini->env) == -1)
 			exit(-1);
 	}
 	else if (pid < 0)

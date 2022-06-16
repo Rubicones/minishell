@@ -19,7 +19,8 @@ NAMES	=	minishell\
 			parser/set_command	parser/set_pipe				parser/set_redir\
 			parser/is_redir		parser/is_pipe\
 			executor/executor	executor/command			executor/open_redir\
-			error/throw_error\
+			error/throw_error	builtins/builtins	builtins/mini_echo\
+			builtins/mini_cd	builtins/mini_env	builtins/mini_pwd\
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
@@ -30,7 +31,7 @@ OBJ			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(NAMES)))
 D_FILES		=	$(addprefix $(OBJ_DIR), $(addsuffix .d, $(NAMES)))
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -O3
+CFLAGS		=	-O3 -g
 AR			=   ar rcs
 
 MD			=	mkdir -p

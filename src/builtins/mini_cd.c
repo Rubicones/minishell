@@ -11,4 +11,10 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "executor.h"
+#include "libft.h"
 
+void	mini_cd(t_command *cmd, char **argv)
+{
+	chdir(argv[1]);
+}
