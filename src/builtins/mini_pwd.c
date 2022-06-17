@@ -6,15 +6,15 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:57 by ejafer            #+#    #+#             */
-/*   Updated: 2022/04/25 16:25:22 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/16 19:56:38 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *mini_pwd(void)
+char	*mini_pwd(void)
 {
-	char path[1000];
+	char	path[1000];
 
 	getcwd(path, sizeof(path));
 	printf("%s\n", path);

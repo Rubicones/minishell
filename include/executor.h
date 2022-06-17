@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:44:23 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 13:16:45 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/16 19:56:25 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,5 @@ void		open_redirout_a(char *filename, t_command *cmd);
 void		mini_echo(t_command *cmd, char **argv);
 void		mini_cd(t_command *cmd, char **argv);
 char		*mini_pwd(void);
-
-
 
 #endif

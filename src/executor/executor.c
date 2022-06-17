@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 15:44:59 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/16 19:56:46 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	parent_process(t_mini *mini, t_token *token)
 
 	fd[0] = -1;
 	fd[1] = -1;
-	cmd = new_command(0, NULL);;
+	cmd = new_command(0, NULL);
 	while (token)
 	{
 		if (token->type == Heredoc)

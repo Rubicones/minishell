@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_check.c                                   :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgizzard <dgizzard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 10:23:41 by dgizzard          #+#    #+#             */
-/*   Updated: 2022/06/16 10:32:38 by dgizzard         ###   ########.fr       */
+/*   Updated: 2022/06/16 20:20:19 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 #include "executor.h"
 #include "libft.h"
 
-
-
-void exec_builtin(t_mini *mini, t_command *cmd, char **argv)
+void	exec_builtin(t_mini *mini, t_command *cmd, char **argv)
 {
 	if (ft_strncmp(cmd->name, "echo", ft_strlen("echo")) == 0)
 		mini_echo(cmd, argv);
@@ -28,19 +26,17 @@ void exec_builtin(t_mini *mini, t_command *cmd, char **argv)
 		mini_pwd();
 }
 
-int builtins_check(t_command *cmd)
+int	builtins_check(t_command *cmd)
 {
-	char *builtins[] = {"echo","cd", "pwd", "export", "unset", \
+	char	*builtins[] = {"echo","cd", "pwd", "export", "unset", \
 	"env", "exit"};
-	int	i;
+	int		i;
 
 	i = 0;
 	while (i < 7)
 	{
 		if (ft_strncmp(cmd->name, builtins[i], ft_strlen(cmd->name) + 1) == 0)
-		{
-			return(1);
-		}
+			return (1);
 		i++;
 	}
 	return (0);
