@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:32:02 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 13:07:56 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 12:05:23 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	close_fds(t_command *cmd)
 		close(cmd->fdout[i]);
 }
 
-t_command	*new_command(char *name, char **argv)
+t_command	*new_command(char *name, char **argv, int pin, int pout)
 {
 	t_command	*tmp;
 
@@ -68,5 +68,9 @@ t_command	*new_command(char *name, char **argv)
 	tmp->argv = argv;
 	tmp->fdin = arrint_new(0);
 	tmp->fdout = arrint_new(0);
+	if (pin != -1)
+		tmp->fdin = arrint_addback(tmp->fdin, pin);
+	if (pout != -1)
+		tmp->fdout = arrint_addback(tmp->fdout, pout);
 	return (tmp);
 }

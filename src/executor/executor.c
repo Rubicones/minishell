@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/18 11:53:19 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 12:10:28 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ void	execute_command(t_mini *mini, t_command *cmd)
 	}
 }
 
+void	close_pipe(int pin, int pout)
+{
+	if (pin != -1)
+		close(pin);
+	if (pout != -1)
+		close(pout);
+}
+
 void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 {
 	int			pid;
@@ -41,32 +49,19 @@ void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 	pid = fork();
 	if (pid != 0)
 	{
-		if (pin != -1)
-			close(pin);
-		if (pout != -1)
-			close(pout);
+		close_pipe(pin, pout);
 		return ;
 	}
-	cmd = new_command(NULL, NULL);
-	if (pin != -1)
-		cmd->fdin = arrint_addback(cmd->fdin, pin);
-	if (pout != -1)
-		cmd->fdout = arrint_addback(cmd->fdout, pout);
+	cmd = new_command(NULL, NULL, pin, pout);
 	while (current && current->type != Pipe)
 	{
-		if (current->type == Heredoc)
-			open_heredoc(current->argv[1], cmd);
-		else if (current->type == Redirin)
-			open_redirin(current->argv[1], cmd);
-		else if (current->type == Redirout)
-			open_redirout(current->argv[1], cmd);
-		else if (current->type == Redirout_a)
-			open_redirout_a(current->argv[1], cmd);
-		else if (current->type == Command)
+		if (current->type == Command)
 		{
 			cmd->name = current->name;
 			cmd->argv = current->argv;
 		}
+		else
+			open_redir(current, cmd);
 		current = current->next;
 	}
 	execute_command(mini, cmd);

@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:44:23 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/18 11:53:02 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 12:10:21 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_command
 	int		*fdout;
 }	t_command;
 
-t_command	*new_command(char *name, char **argv);
+t_command	*new_command(char *name, char **argv, int pin, int pout);
 char		*find_path(t_mini *mini, char *name);
 
 void		duplicate_fdout(int *fdout);
@@ -39,6 +39,8 @@ int			*arrint_addback(int *old_arr, int new_elem);
 int			builtins_check(t_command *cmd);
 
 void		exec_builtin(t_mini *mini, t_command *cmd, char **argv);
+
+void		open_redir(t_token	*current, t_command *cmd);
 void		open_heredoc(char *filename, t_command *cmd);
 void		open_redirin(char *filename, t_command *cmd);
 void		open_redirout(char *filename, t_command *cmd);
