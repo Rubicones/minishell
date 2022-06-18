@@ -6,12 +6,12 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:05:03 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 19:13:04 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 11:54:07 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "executor.h"
+#include "libft.h"
 
 char	*find_path(t_mini *mini, char *name)
 {

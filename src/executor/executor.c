@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/16 19:56:46 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 11:53:19 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,135 +14,96 @@
 #include "executor.h"
 #include "libft.h"
 
-char	*find_path(t_mini *mini, char *name)
+void	execute_command(t_mini *mini, t_command *cmd)
 {
-	char	**paths;
-	char	*path;
-	int		i;
-	char	*part_path;
-
-	i = 0;
-	while (ft_strncmp(mini->env[i], "PATH", 4))
-		i++;
-	paths = ft_split(mini->env[i] + 5, ':');
-	i = 0;
-	while (paths[i])
-	{
-		part_path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(part_path, name);
-		free(part_path);
-		if (access(path, F_OK) == 0)
-			return (path);
-		free(path);
-		i++;
-	}
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
-	free(paths);
-	return (NULL);
-}
-
-void	dup_fdouts(int *fdout)
-{
-	int	i;
-
-	i = -1;
-	while (fdout[++i] != -1)
-	{
-		dup2(fdout[i], STDOUT_FILENO);
-		close(fdout[i]);
-	}
-}
-
-void	dup_fdins(int *fdin)
-{
-	int	i;
-
-	i = -1;
-	while (fdin[++i] != -1)
-	{
-		dup2(fdin[i], STDIN_FILENO);
-		close(fdin[i]);
-	}
-}
-
-void	child_process(t_mini *mini, t_command *cmd)
-{
-	pid_t	pid;
 	char	*path;
 
-	pid = fork();
-	if (pid == 0)
-	{
-		path = find_path(mini, cmd->name);
-		if (path == NULL)
-			exit(-1);
-		dup_fdouts(cmd->fdout);
-		dup_fdins(cmd->fdin);
-		if (builtins_check(cmd) == 1)
-			exec_builtin(mini, cmd, cmd->argv);
-		else if (execve(path, cmd->argv, mini->env) == -1)
-			exit(-1);
-	}
-	else if (pid < 0)
-	{
-		exit(-1);
-	}
+	duplicate_fdout(cmd->fdout);
+	duplicate_fdin(cmd->fdin);
+	if (builtins_check(cmd) == 1)
+		exec_builtin(mini, cmd, cmd->argv);
 	else
 	{
-		close_fds(cmd);
-		free(cmd->fdin);
-		free(cmd->fdout);
-		cmd->fdin = arrint_new(0);
-		cmd->fdout = arrint_new(0);
+		path = find_path(mini, cmd->name);
+		if (path)
+			if (execve(path, cmd->argv, mini->env) == -1)
+				perror(NULL);
+		else
+			perror(cmd->name);
 	}
 }
 
-void	parent_process(t_mini *mini, t_token *token)
+void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 {
-	int			fd[2];
-	int			wpid;
+	int			pid;
 	t_command	*cmd;
 
-	fd[0] = -1;
-	fd[1] = -1;
-	cmd = new_command(0, NULL);
-	while (token)
+	pid = fork();
+	if (pid != 0)
 	{
-		if (token->type == Heredoc)
-			open_heredoc(token->argv[1], cmd);
-		else if (token->type == Redirin)
-			open_redirin(token->argv[1], cmd);
-		else if (token->type == Redirout)
-			open_redirout(token->argv[1], cmd);
-		else if (token->type == Redirout_a)
-			open_redirout_a(token->argv[1], cmd);
-		else if (token->type == Command)
-		{
-			cmd->name = token->name;
-			cmd->argv = token->argv;
-			if (fd[0] != -1)
-				cmd->fdin = arrint_addback(cmd->fdin, fd[0]);
-		}
-		else if (token->type == Pipe)
-		{
-			if (pipe(fd) == -1)
-				exit(-1);
-			if (fd[1] != -1)
-				cmd->fdout = arrint_addback(cmd->fdout, fd[1]);
-			child_process(mini, cmd);
-		}
-		token = token->next;
+		if (pin != -1)
+			close(pin);
+		if (pout != -1)
+			close(pout);
+		return ;
 	}
-	child_process(mini, cmd);
-	while ((wpid = waitpid(-1, NULL, 0)) > 0);
+	cmd = new_command(NULL, NULL);
+	if (pin != -1)
+		cmd->fdin = arrint_addback(cmd->fdin, pin);
+	if (pout != -1)
+		cmd->fdout = arrint_addback(cmd->fdout, pout);
+	while (current && current->type != Pipe)
+	{
+		if (current->type == Heredoc)
+			open_heredoc(current->argv[1], cmd);
+		else if (current->type == Redirin)
+			open_redirin(current->argv[1], cmd);
+		else if (current->type == Redirout)
+			open_redirout(current->argv[1], cmd);
+		else if (current->type == Redirout_a)
+			open_redirout_a(current->argv[1], cmd);
+		else if (current->type == Command)
+		{
+			cmd->name = current->name;
+			cmd->argv = current->argv;
+		}
+		current = current->next;
+	}
+	execute_command(mini, cmd);
+}
+
+void	wait_childprocesses(void)
+{
+	while (waitpid(-1, NULL, 0) > 0)
+	{
+	}
 }
 
 void	execute(t_mini *mini)
 {
-	t_token	*cur_tokens;
+	int			pin;
+	int			pout;
+	int			fd[2];
+	t_token		*current_fast;
+	t_token		*current_slow;
 
-	cur_tokens = *mini->tokens;
-	parent_process(mini, cur_tokens);
+	pin = -1;
+	pout = -1;
+	current_fast = *mini->tokens;
+	current_slow = *mini->tokens;
+	while (current_fast)
+	{
+		if (current_fast->type == Pipe)
+		{
+			if (pipe(fd))
+				perror(NULL);
+			pout = fd[1];
+			init_command(mini, current_slow, pin, pout);
+			pin = fd[0];
+			current_slow = current_fast->next;
+		}
+		current_fast = current_fast->next;
+	}
+	init_command(mini, current_slow, pin, pout);
+	wait_childprocesses();
 }

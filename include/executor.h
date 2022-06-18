@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:44:23 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/16 19:56:25 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 11:53:02 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ typedef struct s_command
 }	t_command;
 
 t_command	*new_command(char *name, char **argv);
+char		*find_path(t_mini *mini, char *name);
+
+void		duplicate_fdout(int *fdout);
+void		duplicate_fdin(int *fdin);
 void		close_fds(t_command *cmd);
 
 int			*arrint_new(int len);

@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 14:10:12 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/17 19:01:45 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <signal.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <errno.h>
 
 # define QUOTES_D	'"'
 # define QUOTES_S	'\''
