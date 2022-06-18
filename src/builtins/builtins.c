@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 10:23:41 by dgizzard          #+#    #+#             */
-/*   Updated: 2022/06/16 20:20:19 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 13:21:13 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	exec_builtin(t_mini *mini, t_command *cmd, char **argv)
 		mini_env(mini);
 	if (ft_strncmp(cmd->name, "pwd", ft_strlen("pwd")) == 0)
 		mini_pwd();
+	if (ft_strncmp(cmd->name, "exit", ft_strlen("exit")) == 0)
+		mini_exit(mini);
 }
 
 int	builtins_check(t_command *cmd)
@@ -35,7 +37,7 @@ int	builtins_check(t_command *cmd)
 	i = 0;
 	while (i < 7)
 	{
-		if (ft_strncmp(cmd->name, builtins[i], ft_strlen(cmd->name) + 1) == 0)
+		if (ft_strncmp(cmd->name, builtins[i], ft_strlen(cmd->name)) == 0)
 			return (1);
 		i++;
 	}

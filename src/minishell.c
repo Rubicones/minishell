@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:35:09 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 14:07:20 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 14:14:59 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,18 @@ void	minishell(t_mini *mini)
 	}
 }
 
+void	*signal_handler(int *ignore)
+{
+	if (ignore)
+		printf("\n\033[32mMinishell\033[0m$: ");
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_mini	*mini;
 
+	//signal(SIGINT, signal_handler);
+	//signal(SIGTSTP, signal_handler);
 	mini = malloc(sizeof(t_mini));
 	mini->env = env;
 	mini->argc = argc;

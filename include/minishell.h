@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/17 19:01:45 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 13:19:13 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct s_parser
 void		split_line(t_mini *mini);
 void		parse(t_mini *mini);
 void		execute(t_mini *mini);
-char		*mini_env(t_mini *mini);
 void		throw_error(int error_code);
 
 t_token		*new_token(char	*new_name, t_type new_type);

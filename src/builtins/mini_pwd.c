@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:57 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/16 19:56:38 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 13:36:51 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ char	*mini_pwd(void)
 {
 	char	path[1000];
 
-	getcwd(path, sizeof(path));
+	if (getcwd(path, sizeof(path)) == NULL)
+		perror(NULL);
 	printf("%s\n", path);
 	return (path);
 }

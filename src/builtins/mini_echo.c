@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:51 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/16 20:20:58 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/18 13:09:42 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,21 @@
 
 void	mini_echo(t_command *cmd, char **argv)
 {
-	if (ft_strncmp(argv[1], "-n", 3) == 0 && ft_strncmp(argv[2], "(null)", 6) != 0)
-		printf("%s", argv[2]);
-	else
-		printf("%s\n", argv[1]);
-}
+	int		i;
+	char	*new_line;
 
-//echo -n "shit" | cat -e не работает
-//echo "shit" | cat -e работает, но виснет почему-то
+	i = 0;
+	new_line = "\n";
+	if (ft_strncmp(argv[1], "-n", 3) == 0)
+	{
+		++i;
+		new_line = "";
+	}
+	while (argv[++i])
+	{
+		printf("%s", argv[i]);
+		if (argv[i + 1])
+			printf(" ");
+	}
+	printf("%s", new_line);
+}
