@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:47:49 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/17 18:56:23 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/20 19:37:43 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ void	process_quotes(t_split_data *data)
 
 	openquoute = current_letter(data);
 	word = ft_strnew(1);
-	word[0] = '\"';
+	word[0] = openquoute;
 	data->index++;
 	while (current_letter(data) && current_letter(data) != openquoute)
 	{
 		word = ft_str_addletter(word, current_letter(data));
 		data->index++;
 	}
-	word = ft_str_addletter(word, '\"');
+	word = ft_str_addletter(word, openquoute);
 	data->words = ft_arr_addback(data->words, word);
 	data->index++;
 }

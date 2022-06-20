@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/20 17:57:02 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/20 19:43:49 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_mini
 	char	**env;
 	char	*line;
 	char	**splited_line;
-	int		heredocseed;
+	int		pid;
 	int		heredocid;
 	t_token	**tokens;
 }	t_mini;

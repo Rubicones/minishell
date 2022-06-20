@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 16:04:40 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/20 19:26:48 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/20 20:08:03 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ char	*generate_heredocname(t_mini *mini)
 {
 	char	*tmp;
 	char	*result;
-	char	*seed;
+	char	*pid;
 	char	*id;
 
 	result = ".heredoc_";
-	seed = ft_itoa(mini->heredocseed);
-	result = ft_strjoin(result, seed);
-	free(seed);
+	pid = ft_itoa(mini->pid);
+	result = ft_strjoin(result, pid);
+	free(pid);
 	tmp = result;
 	result = ft_strjoin(result, "_");
 	free(tmp);
@@ -89,7 +89,7 @@ void	set_redir(t_mini *mini, t_parser *data)
 	}
 	else if (is_redirin(redirtype))
 		reder_token = new_token(redirtype, Redirin);
-	else if (is_redirout(filename))
+	else if (is_redirout(redirtype))
 		reder_token = new_token(redirtype, Redirout);
 	else
 		reder_token = new_token(redirtype, Redirout_a);

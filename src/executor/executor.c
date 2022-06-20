@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/18 14:14:46 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/20 20:04:22 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ void	execute_command(t_mini *mini, t_command *cmd)
 	{
 		path = find_path(mini, cmd->name);
 		if (path)
+		{
 			if (execve(path, cmd->argv, mini->env) == -1)
 				perror(NULL);
+		}
 		else
 			perror(cmd->name);
 	}

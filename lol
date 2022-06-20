@@ -1,0 +1,11 @@
+Makefile
+file1
+file2
+file3
+file4
+include
+lol
+minishell
+obj
+src
+lol
