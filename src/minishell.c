@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:35:09 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/20 20:05:26 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/20 20:25:56 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,27 @@ void	minishell(t_mini *mini)
 	}
 }
 
+void	sighandler_exit(int n)
+{
+	signal(SIGQUIT, SIG_IGN);
+	kill(0, SIGQUIT);
+	signal(SIGQUIT, SIG_DFL);
+	while (waitpid(-1, NULL, 0) > 0)
+	{
+	}
+	exit(0);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_mini	*mini;
 
-	//signal(SIGINT, signal_handler);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGUSR2, sighandler_exit);
 	//signal(SIGTSTP, signal_handler);
 	mini = malloc(sizeof(t_mini));
 	mini->pid = getpid();
-	//printf("pid: %d\n", mini->pid);
+	printf("pid: %d\n", mini->pid);
 	mini->heredocid = 0;
 	mini->env = env;
 	mini->argc = argc;

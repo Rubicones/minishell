@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/20 20:04:22 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/20 20:28:47 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 		close_pipe(pin, pout);
 		return ;
 	}
-	//signal(SIGINT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
 	//signal(SIGTSTP, SIG_DFL);
 	cmd = new_command(NULL, NULL, pin, pout);
 	while (current && current->type != Pipe)
