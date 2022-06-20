@@ -4,3 +4,4 @@ minishell
 src/spliter/test_main.c
 a.out
 file*
+.heredoc*

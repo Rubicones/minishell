@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 19:20:31 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 14:09:59 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:59:31 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	parse(t_mini *mini)
 		if (is_pipe(data))
 			set_pipe(data);
 		else if (is_redir(data))
-			set_redir(data);
+			set_redir(mini, data);
 		else if (is_command_set(data))
 			add_to_argv(data);
 		else

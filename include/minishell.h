@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/18 13:19:13 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:57:02 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_mini
 	char	**env;
 	char	*line;
 	char	**splited_line;
+	int		heredocseed;
+	int		heredocid;
 	t_token	**tokens;
 }	t_mini;
 
@@ -83,12 +85,12 @@ t_parser	*new_parser(char **words);
 char		*current_word(t_parser *data);
 int			is_command_set(t_parser *data);
 int			is_pipe(t_parser *data);
-int			is_redir(t_parser *data);
+int			is_redir( t_parser *data);
 int			is_heredoc(char	*word);
 int			is_redirin(char	*word);
 int			is_redirout(char *word);
 int			is_redirout_a(char *word);
-void		set_redir(t_parser *data);
+void		set_redir(t_mini *mini, t_parser *data);
 void		set_pipe(t_parser *data);
 void		set_command(t_parser *data);
 

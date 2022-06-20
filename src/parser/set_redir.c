@@ -1,34 +1,104 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_reder.c                                        :+:      :+:    :+:   */
+/*   set_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 16:04:40 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/14 14:05:02 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/20 19:26:48 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-void	set_redir(t_parser *data)
+char	*process_heredoc(char *stopword)
+{
+	char	*tmp;
+	char	*result;
+	char	*line;
+
+	result = ft_strnew(0);
+	line = ft_strnew(0);
+	line = readline("> ");
+	while (ft_strlen(line) != ft_strlen(stopword)
+		|| ft_strncmp(line, stopword, ft_strlen(stopword)))
+	{
+		tmp = result;
+		result = ft_strjoin(result, line);
+		free(tmp);
+		tmp = result;
+		result = ft_strjoin(result, "\n");
+		free(tmp);
+		line = readline("> ");
+	}
+	return (result);
+}
+
+char	*generate_heredocname(t_mini *mini)
+{
+	char	*tmp;
+	char	*result;
+	char	*seed;
+	char	*id;
+
+	result = ".heredoc_";
+	seed = ft_itoa(mini->heredocseed);
+	result = ft_strjoin(result, seed);
+	free(seed);
+	tmp = result;
+	result = ft_strjoin(result, "_");
+	free(tmp);
+	id = ft_itoa(mini->heredocid++);
+	tmp = result;
+	result = ft_strjoin(result, id);
+	free(id);
+	free(tmp);
+	return (result);
+}
+
+char	*set_heredoc(t_mini *mini, t_parser *data)
+{
+	int		fd;
+	char	*filename;
+	char	*result;
+	char	*stopword;
+
+	data->index++;
+	stopword = current_word(data);
+	result = process_heredoc(stopword);
+	filename = generate_heredocname(mini);
+	fd = open(filename, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+	write(fd, result, ft_strlen(result));
+	close(fd);
+	return (filename);
+}
+
+void	set_redir(t_mini *mini, t_parser *data)
 {
 	t_token	*reder_token;
-	char	*word;
+	char	*filename;
+	char	*redirtype;
 
-	word = current_word(data);
-	if (is_heredoc(word))
-		reder_token = new_token(word, Heredoc);
-	else if (is_redirin(word))
-		reder_token = new_token(word, Redirin);
-	else if (is_redirout(word))
-		reder_token = new_token(word, Redirout);
+	redirtype = current_word(data);
+	if (is_heredoc(redirtype))
+	{
+		filename = set_heredoc(mini, data);
+		reder_token = new_token(redirtype, Redirin);
+	}
+	else if (is_redirin(redirtype))
+		reder_token = new_token(redirtype, Redirin);
+	else if (is_redirout(filename))
+		reder_token = new_token(redirtype, Redirout);
 	else
-		reder_token = new_token(word, Redirout_a);
-	data->index++;
-	reder_token->argv = ft_arr_addback(reder_token->argv, current_word(data));
+		reder_token = new_token(redirtype, Redirout_a);
+	if (is_heredoc(redirtype) == 0)
+	{
+		data->index++;
+		filename = current_word(data);
+	}
+	reder_token->argv = ft_arr_addback(reder_token->argv, filename);
 	token_push_back(data->head, reder_token);
 	data->index++;
 }
