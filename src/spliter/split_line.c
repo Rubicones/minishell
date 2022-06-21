@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:32:19 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/20 19:38:31 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/21 14:11:49 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	post_process(t_split_data *data)
 {
-	return ;
+	if (data) {};
 }
 
 void	split_line(t_mini *mini)

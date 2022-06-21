@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:53 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/21 03:06:49 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/21 14:16:28 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "executor.h"
 #include "libft.h"
 
-void	mini_cd(t_command *cmd, char **argv)
+void	mini_cd(t_command *cmd)
 {
-	if (chdir(argv[1]) == -1)
-		perror(argv[1]);
+	if (chdir(cmd->argv[1]) == -1)
+		perror(cmd->argv[1]);
 }

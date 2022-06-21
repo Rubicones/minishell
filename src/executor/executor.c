@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/21 03:03:46 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/21 14:15:45 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	execute_command(t_mini *mini, t_command *cmd)
 	char	*path;
 
 	if (is_builtin(cmd))
-		execute_builtin(mini, cmd, cmd->argv);
+		execute_builtin(mini, cmd);
 	else
 	{
 		path = find_path(mini, cmd->name);

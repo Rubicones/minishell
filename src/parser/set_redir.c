@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 16:04:40 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/21 02:52:04 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/21 14:12:36 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	set_redir(t_mini *mini, t_parser *data)
 	char	*redirtype;
 
 	redirtype = current_word(data);
+	filename = NULL;
 	if (is_heredoc(redirtype))
 	{
 		filename = set_heredoc(mini, data);
