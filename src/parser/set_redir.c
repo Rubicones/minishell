@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 16:04:40 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/20 20:08:03 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/21 02:52:04 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*generate_heredocname(t_mini *mini)
 	char	*pid;
 	char	*id;
 
-	result = ".heredoc_";
+	result = "/tmp/heredoc_";
 	pid = ft_itoa(mini->pid);
 	result = ft_strjoin(result, pid);
 	free(pid);
@@ -61,6 +61,7 @@ char	*generate_heredocname(t_mini *mini)
 char	*set_heredoc(t_mini *mini, t_parser *data)
 {
 	int		fd;
+	char	*fd_str;
 	char	*filename;
 	char	*result;
 	char	*stopword;
@@ -70,7 +71,18 @@ char	*set_heredoc(t_mini *mini, t_parser *data)
 	result = process_heredoc(stopword);
 	filename = generate_heredocname(mini);
 	fd = open(filename, O_TRUNC | O_WRONLY | O_CREAT, 0644);
-	write(fd, result, ft_strlen(result));
+	if (fd < 0)
+	{
+		perror(filename);
+		exit(0);
+	}
+	if (write(fd, result, ft_strlen(result)) == -1)
+	{
+		fd_str = ft_itoa(fd);
+		perror(fd_str);
+		free(fd_str);
+		exit(0);
+	}
 	close(fd);
 	return (filename);
 }
@@ -85,7 +97,7 @@ void	set_redir(t_mini *mini, t_parser *data)
 	if (is_heredoc(redirtype))
 	{
 		filename = set_heredoc(mini, data);
-		reder_token = new_token(redirtype, Redirin);
+		reder_token = new_token(redirtype, Heredoc);
 	}
 	else if (is_redirin(redirtype))
 		reder_token = new_token(redirtype, Redirin);

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_pwd.c                                         :+:      :+:    :+:   */
+/*   post_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 16:03:57 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/21 03:07:56 by ejafer           ###   ########.fr       */
+/*   Created: 2022/06/21 02:53:47 by ejafer            #+#    #+#             */
+/*   Updated: 2022/06/21 02:53:58 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	mini_pwd(void)
+void	post_execution(t_mini *mini)
 {
-	char	path[1000];
-
-	if (getcwd(path, sizeof(path)) == NULL)
-		perror(path);
-	printf("%s\n", path);
+	clear_tokens(*mini->tokens);
+	free(mini->splited_line);
+	free(mini->tokens);
+	mini->tokens = NULL;
 }

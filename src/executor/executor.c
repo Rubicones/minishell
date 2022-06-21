@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/20 20:28:47 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/21 03:03:46 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,13 @@ void	execute_command(t_mini *mini, t_command *cmd)
 {
 	char	*path;
 
-	duplicate_fdout(cmd->fdout);
-	duplicate_fdin(cmd->fdin);
-	if (builtins_check(cmd) == 1)
-		exec_builtin(mini, cmd, cmd->argv);
+	if (is_builtin(cmd))
+		execute_builtin(mini, cmd, cmd->argv);
 	else
 	{
 		path = find_path(mini, cmd->name);
 		if (path)
-		{
-			if (execve(path, cmd->argv, mini->env) == -1)
-				perror(NULL);
-		}
+			execute_bin(mini, cmd, path);
 		else
 			perror(cmd->name);
 	}
@@ -55,7 +50,7 @@ void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 		return ;
 	}
 	signal(SIGINT, SIG_DFL);
-	//signal(SIGTSTP, SIG_DFL);
+	signal(SIGTSTP, SIG_DFL);
 	cmd = new_command(NULL, NULL, pin, pout);
 	while (current && current->type != Pipe)
 	{
@@ -105,4 +100,5 @@ void	execute(t_mini *mini)
 	}
 	init_command(mini, current_slow, pin, pout);
 	wait_childprocesses();
+	post_execution(mini);
 }

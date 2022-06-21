@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/20 19:43:49 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/21 02:24:05 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void		execute(t_mini *mini);
 void		throw_error(int error_code);
 
 t_token		*new_token(char	*new_name, t_type new_type);
+void		clear_tokens(t_token *token);
 void		token_push_back(t_token **head, t_token *to_push);
 
 t_parser	*new_parser(char **words);

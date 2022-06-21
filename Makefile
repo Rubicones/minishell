@@ -6,7 +6,7 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/06/18 13:20:13 by ejafer           ###   ########.fr        #
+#    Updated: 2022/06/21 03:03:13 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,15 @@ NAME	=	minishell
 NAMES	=	minishell\
 			spliter/split_line	spliter/process_separator	spliter/process_quotes\
 			spliter/split_data	spliter/process_word\
+			\
 			parser/parse		parser/parser_data			parser/token\
 			parser/set_command	parser/set_pipe				parser/set_redir\
 			parser/is_redir		parser/is_pipe\
+			\
 			executor/executor	executor/command			executor/open_redir\
-			executor/findpath	executor/duplicate_fd\
-			error/throw_error	\
+			executor/findpath	executor/duplicate_fd		executor/post_execution\
+			executor/execute_bin	executor/execute_builtin\
+			\
 			builtins/builtins	builtins/mini_echo\
 			builtins/mini_cd	builtins/mini_env	builtins/mini_pwd\
 			builtins/mini_exit

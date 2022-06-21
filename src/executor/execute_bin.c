@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_pwd.c                                         :+:      :+:    :+:   */
+/*   execute_bin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 16:03:57 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/21 03:07:56 by ejafer           ###   ########.fr       */
+/*   Created: 2022/06/21 02:55:32 by ejafer            #+#    #+#             */
+/*   Updated: 2022/06/21 02:58:04 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "executor.h"
 
-void	mini_pwd(void)
+void	execute_bin(t_mini *mini, t_command *cmd, char *path)
 {
-	char	path[1000];
-
-	if (getcwd(path, sizeof(path)) == NULL)
-		perror(path);
-	printf("%s\n", path);
+	duplicate_fdout(cmd->fdout);
+	duplicate_fdin(cmd->fdin);
+	if (execve(path, cmd->argv, mini->env) == -1)
+		perror(NULL);
+	free(path);
 }

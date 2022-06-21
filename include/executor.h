@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:44:23 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/18 13:19:22 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/21 03:04:17 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ void		close_fds(t_command *cmd);
 int			*arrint_new(int len);
 int			arrint_len(int *arr);
 int			*arrint_addback(int *old_arr, int new_elem);
-int			builtins_check(t_command *cmd);
+int			is_builtin(t_command *cmd);
 
-void		exec_builtin(t_mini *mini, t_command *cmd, char **argv);
+void		execute_builtin(t_mini *mini, t_command *cmd, char **argv);
+void		execute_bin(t_mini *mini, t_command *cmd, char *path);
+void		post_execution(t_mini *mini);
 
 void		open_redir(t_token	*current, t_command *cmd);
 void		open_heredoc(char *filename, t_command *cmd);
