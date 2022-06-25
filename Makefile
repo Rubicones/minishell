@@ -6,19 +6,22 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/06/21 03:14:44 by ejafer           ###   ########.fr        #
+#    Updated: 2022/06/25 19:32:38 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 
 NAMES	=	minishell\
+			\
+			get_envvars/get_envvars\
+			\
 			spliter/split_line	spliter/process_separator	spliter/process_quotes\
 			spliter/split_data	spliter/process_word\
 			\
 			parser/parse		parser/parser_data			parser/token\
 			parser/set_command	parser/set_pipe				parser/set_redir\
-			parser/is_redir		parser/is_pipe\
+			parser/is_redir		parser/is_pipe				parser/remove_quotes\
 			\
 			executor/executor	executor/command			executor/open_redir\
 			executor/findpath	executor/duplicate_fd		executor/post_execution\

@@ -6,18 +6,13 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:32:19 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/21 14:11:49 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/25 19:18:57 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "spliter.h"
 #include "minishell.h"
 #include "libft.h"
-
-void	post_process(t_split_data *data)
-{
-	if (data) {};
-}
 
 void	split_line(t_mini *mini)
 {
@@ -33,7 +28,6 @@ void	split_line(t_mini *mini)
 		else
 			process_word(data);
 	}
-	post_process(data);
 	mini->splited_line = data->words;
 	free(data);
 }

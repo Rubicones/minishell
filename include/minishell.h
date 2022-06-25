@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/21 02:24:05 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/25 19:28:06 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_parser
 	t_token			**head;
 }	t_parser;
 
+void		resolve_envvars(t_mini *mini);
 void		split_line(t_mini *mini);
 void		parse(t_mini *mini);
 void		execute(t_mini *mini);
@@ -84,6 +85,7 @@ void		token_push_back(t_token **head, t_token *to_push);
 
 t_parser	*new_parser(char **words);
 char		*current_word(t_parser *data);
+char		*remove_quotes(char *word);
 int			is_command_set(t_parser *data);
 int			is_pipe(t_parser *data);
 int			is_redir( t_parser *data);

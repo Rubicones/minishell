@@ -1,7 +1,5 @@
 {
 	"files.associations": {
-		"ejafer_minishell.h": "c",
-		"minishell.h": "c",
 		"typeinfo": "c"
 	}
 }

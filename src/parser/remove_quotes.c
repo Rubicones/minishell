@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   throw_error.c                                      :+:      :+:    :+:   */
+/*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/07 15:18:10 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/07 15:25:49 by ejafer           ###   ########.fr       */
+/*   Created: 2022/06/25 19:21:13 by ejafer            #+#    #+#             */
+/*   Updated: 2022/06/25 19:28:10 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-void	throw_error(int error_code)
+char	*remove_quotes(char *word)
 {
-	int	c;
+	int		i;
+	int		len;
+	char	*result;
 
-	c = -1;
-	if (error_code)
-		c = write(2, "ERROR\n", 6);
-	if (c)
-	{
-	}
+	len = ft_strlen(word) - 2;
+	result = malloc(sizeof(char) * (len + 1));
+	i = -1;
+	while (++i < len)
+		result[i] = word[i + 1];
+	result[len] = 0;
+	free(word);
+	return (result);
 }
