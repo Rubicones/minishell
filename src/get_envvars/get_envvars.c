@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:26:52 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/25 19:15:44 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/25 19:40:45 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	*join_envvar(char **env, char *result, char *line, int len)
 	return (result);
 }
 
+//Отрефакторить для норминетта. Возможно через структуру
 void	resolve_envvars(t_mini *mini)
 {
 	int			i;

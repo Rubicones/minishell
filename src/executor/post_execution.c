@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 02:53:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/21 02:53:58 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/25 19:39:27 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	post_execution(t_mini *mini)
 {
 	clear_tokens(*mini->tokens);
-	free(mini->splited_line);
 	free(mini->tokens);
 	mini->tokens = NULL;
 }
