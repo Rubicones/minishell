@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/25 19:40:22 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/27 14:37:06 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 		return ;
 	}
 	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	signal(SIGTSTP, SIG_DFL);
 	cmd = new_command(NULL, NULL, pin, pout);
 	while (current && current->type != Pipe)
@@ -68,7 +69,7 @@ void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 
 void	wait_childprocesses(void)
 {
-	while (waitpid(-1, NULL, 0) > 0)
+	while (waitpid(-1, &g_status, 0) > 0)
 	{
 	}
 }

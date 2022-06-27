@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/25 19:28:06 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/27 14:55:49 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define REDIROUT	">"
 # define REDIROUT_A ">>"
 # define PIPE		"|"
+
+int		g_status;
 
 typedef enum e_type
 {
@@ -72,6 +74,8 @@ typedef struct s_parser
 	t_token			*current_command;
 	t_token			**head;
 }	t_parser;
+
+void		init_sighandler(void);
 
 void		resolve_envvars(t_mini *mini);
 void		split_line(t_mini *mini);

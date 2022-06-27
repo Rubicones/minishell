@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:26:52 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/25 19:40:45 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/25 19:58:43 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ char	*envvar_get(char *name, char **env)
 	int		i;
 	char	*result;
 
+	if (ft_strlen(name) == 1 && name[0] == '?')
+	{
+		result = ft_itoa(g_status);
+		return (result);
+	}
 	i = envar_position(name, env);
 	if (env[i] == NULL)
 		return (NULL);

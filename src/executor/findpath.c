@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:05:03 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/18 11:54:07 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/27 14:15:15 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*find_path(t_mini *mini, char *name)
 	int		i;
 	char	*part_path;
 
+	if (access(name, F_OK) == 0)
+		return (name);
 	i = 0;
 	while (ft_strncmp(mini->env[i], "PATH", 4))
 		i++;

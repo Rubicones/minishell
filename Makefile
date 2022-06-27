@@ -6,13 +6,15 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/06/25 19:32:38 by ejafer           ###   ########.fr        #
+#    Updated: 2022/06/27 14:56:27 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 
 NAMES	=	minishell\
+			\
+			signals/signals_handler\
 			\
 			get_envvars/get_envvars\
 			\
