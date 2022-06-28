@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:51 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/27 14:04:01 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/28 15:30:41 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	mini_echo(t_command *cmd)
 			printf(" ");
 	}
 	printf("%s", new_line);
+	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/27 14:37:06 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/28 15:39:52 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	execute_command(t_mini *mini, t_command *cmd)
 		if (path)
 			execute_bin(mini, cmd, path);
 		else
+		{
 			perror(cmd->name);
+			exit(0);
+		}
 	}
 }
 
