@@ -70,16 +70,12 @@ char	*join_envvar(char **env, char *result, char *line, int len)
 	return (result);
 }
 
-//Отрефакторить для норминетта. Возможно через структуру
-void	resolve_envvars(t_mini *mini)
+void	resolve_envvars(t_mini *mini, int i, int j)
 {
-	int			i;
-	int			j;
 	int			ignore;
 	char		*result;
 
 	result = ft_strnew(0);
-	i = 0;
 	ignore = 0;
 	while (mini->line[i])
 	{

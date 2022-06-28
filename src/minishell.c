@@ -23,7 +23,7 @@ void	minishell(t_mini *mini)
 			break ;
 		}
 		add_history(mini->line);
-		resolve_envvars(mini);
+		resolve_envvars(mini, 0, 0);
 		split_line(mini);
 		parse(mini);
 		execute(mini);

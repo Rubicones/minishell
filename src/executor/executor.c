@@ -33,14 +33,6 @@ void	execute_command(t_mini *mini, t_command *cmd)
 	}
 }
 
-void	close_pipe(int pin, int pout)
-{
-	if (pin != -1)
-		close(pin);
-	if (pout != -1)
-		close(pout);
-}
-
 void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 {
 	int			pid;
@@ -80,33 +72,27 @@ void	wait_childprocesses(void)
 	g_status = WEXITSTATUS(exitinfo);
 }
 
-// Запихнуть все в стрктуру для норминнета
 void	execute(t_mini *mini)
 {
-	int			pin;
-	int			pout;
-	int			fd[2];
-	t_token		*current_fast;
-	t_token		*current_slow;
+	t_executer_utils	*utils;
+	int					fd[2];
 
-	pin = -1;
-	pout = -1;
-	current_fast = *mini->tokens;
-	current_slow = *mini->tokens;
-	while (current_fast)
+	utils = malloc(sizeof(t_executer_utils) * 1);
+	fill_executor_struct(utils, mini);
+	while (utils->current_fast)
 	{
-		if (current_fast->type == Pipe)
+		if (utils->current_fast->type == Pipe)
 		{
 			if (pipe(fd))
 				perror(NULL);
-			pout = fd[1];
-			init_command(mini, current_slow, pin, pout);
-			pin = fd[0];
-			current_slow = current_fast->next;
+			utils->pout = fd[1];
+			init_command(mini, utils->current_slow, utils->pin, utils->pout);
+			utils->pin = fd[0];
+			utils->current_slow = utils->current_fast->next;
 		}
-		current_fast = current_fast->next;
+		utils->current_fast = utils->current_fast->next;
 	}
-	init_command(mini, current_slow, pin, pout);
+	init_command(mini, utils->current_slow, utils->pin, utils->pout);
 	wait_childprocesses();
 	post_execution(mini);
 }

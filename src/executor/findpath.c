@@ -13,6 +13,16 @@
 #include "minishell.h"
 #include "libft.h"
 
+void	free_paths(char **paths)
+{
+	int	i;
+
+	i = -1;
+	while (paths[++i])
+		free(paths[i]);
+	free(paths);
+}
+
 char	*find_path(t_mini *mini, char *name)
 {
 	char	**paths;
@@ -26,8 +36,8 @@ char	*find_path(t_mini *mini, char *name)
 	while (ft_strncmp(mini->env[i], "PATH", 4))
 		i++;
 	paths = ft_split(mini->env[i] + 5, ':');
-	i = 0;
-	while (paths[i])
+	i = -1;
+	while (paths[++i])
 	{
 		part_path = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(part_path, name);
@@ -35,11 +45,7 @@ char	*find_path(t_mini *mini, char *name)
 		if (access(path, F_OK) == 0)
 			return (path);
 		free(path);
-		i++;
 	}
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
-	free(paths);
+	free_paths(paths);
 	return (NULL);
 }

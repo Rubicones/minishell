@@ -27,7 +27,7 @@ NAMES	=	minishell\
 			\
 			executor/executor	executor/command			executor/open_redir\
 			executor/findpath	executor/duplicate_fd		executor/post_execution\
-			executor/execute_bin	executor/execute_builtin\
+			executor/execute_bin	executor/execute_builtin executor/executor_utils\
 			\
 			builtins/builtins	builtins/mini_echo\
 			builtins/mini_cd	builtins/mini_env	builtins/mini_pwd\
