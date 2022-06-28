@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/28 15:39:52 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/28 16:38:28 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	execute_command(t_mini *mini, t_command *cmd)
 		else
 		{
 			perror(cmd->name);
-			exit(0);
+			exit(127);
 		}
 	}
 }
@@ -72,9 +72,12 @@ void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 
 void	wait_childprocesses(void)
 {
-	while (waitpid(-1, &g_status, 0) > 0)
+	int	exitinfo;
+
+	while (waitpid(-1, &exitinfo, 0) > 0)
 	{
 	}
+	g_status = WEXITSTATUS(exitinfo);
 }
 
 // Запихнуть все в стрктуру для норминнета

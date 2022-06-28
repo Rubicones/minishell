@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:45 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/25 20:53:24 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/28 16:45:41 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	mini_exit(t_command *cmd, int ppid)
 	int	status;
 
 	if (!cmd->argv[1])
-		status = 0;
+		status = g_status;
 	else
 	{
 		status = ft_atoi(cmd->argv[1]);

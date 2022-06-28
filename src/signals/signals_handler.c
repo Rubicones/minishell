@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 14:54:05 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/28 15:08:20 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/28 16:31:47 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	sighandler_interupt(int signo)
 			perror("\n");
 		rl_on_new_line();
 		rl_point = 0;
-		rl_mark = 0;
 		rl_end = 0;
 		rl_line_buffer[0] = 0;
 		rl_redisplay();
@@ -30,11 +29,13 @@ void	sighandler_interupt(int signo)
 
 void	sighandler_exit(int signo)
 {
+	int	exitinfo;
+
 	if (signo == SIGUSR2)
 	{
-		while (waitpid(-1, &g_status, 0) > 0)
-		{
-		}
+		while (waitpid(-1, &exitinfo, 0) > 0)
+			;
+		g_status = WEXITSTATUS(exitinfo);
 		exit(g_status);
 	}
 }
