@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 14:54:05 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/27 14:57:38 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/28 15:08:20 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	sighandler_interupt(int signo)
 		if (write(2, "\n", 1) < 0)
 			perror("\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		rl_point = 0;
+		rl_mark = 0;
+		rl_end = 0;
+		rl_line_buffer[0] = 0;
 		rl_redisplay();
 	}
 }
@@ -38,7 +41,6 @@ void	sighandler_exit(int signo)
 
 void	init_sighandler(void)
 {
-	rl_catch_signals = 1;
 	signal(SIGINT, sighandler_interupt);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGUSR2, sighandler_exit);

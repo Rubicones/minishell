@@ -6,11 +6,12 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:32:02 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/18 12:05:23 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/28 14:30:39 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+#include "libft.h"
 
 int	*arrint_new(int len)
 {
@@ -27,8 +28,7 @@ int	arrint_len(int *arr)
 
 	len = -1;
 	while (arr[++len] != -1)
-	{
-	}
+		;
 	return (len);
 }
 
