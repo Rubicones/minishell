@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:20:28 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/25 15:44:57 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/29 15:43:41 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_executer_utils
 	t_token	*current_slow;
 }	t_executer_utils;
 
+void		execute_bins(t_mini *mini);
 t_command	*new_command(char *name, char **argv, int pin, int pout);
 char		*find_path(t_mini *mini, char *name);
 
@@ -47,7 +48,7 @@ void		close_pipe(int pin, int pout);
 int			*arrint_new(int len);
 int			arrint_len(int *arr);
 int			*arrint_addback(int *old_arr, int new_elem);
-int			is_builtin(t_command *cmd);
+int			is_builtin(char	*name);
 
 void		execute_builtin(t_mini *mini, t_command *cmd);
 void		execute_bin(t_mini *mini, t_command *cmd, char *path);
@@ -60,9 +61,9 @@ void		open_redirout(char *filename, t_command *cmd);
 void		open_redirout_a(char *filename, t_command *cmd);
 
 void		mini_echo(t_command *cmd);
-void		mini_exit(t_command *cmd, int ppid);
+void		mini_exit(t_command *cmd);
 char		*mini_env(t_mini *mini);
-void		mini_cd(t_command *cmd);
+void		mini_cd(t_command *cmd, char **env);
 char		*mini_pwd(void);
 
 #endif

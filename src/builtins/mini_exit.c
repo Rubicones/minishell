@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:45 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/28 16:45:41 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/29 15:43:20 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "executor.h"
 #include "libft.h"
 
-void	mini_exit(t_command *cmd, int ppid)
+void	mini_exit(t_command *cmd)
 {
 	int	status;
 
@@ -28,6 +28,5 @@ void	mini_exit(t_command *cmd, int ppid)
 		if (status < 0)
 			status = -1;
 	}
-	kill(ppid, SIGUSR2);
 	exit(status);
 }

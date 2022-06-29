@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/29 13:32:48 by ejafer           ###   ########.fr       */
+/*   Created: 2022/06/29 15:22:01 by ejafer            #+#    #+#             */
+/*   Updated: 2022/06/29 15:45:44 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,85 +14,54 @@
 #include "executor.h"
 #include "libft.h"
 
-void	execute_command(t_mini *mini, t_command *cmd)
+int	tokens_has_pipe(t_token *token)
 {
-	char	*path;
-
-	if (is_builtin(cmd))
-		execute_builtin(mini, cmd);
-	else
+	while (token)
 	{
-		path = find_path(mini, cmd->name);
-		if (path)
-			execute_bin(mini, cmd, path);
-		else
-		{
-			perror(cmd->name);
-			exit(127);
-		}
+		if (token->type == Pipe)
+			return (1);
+		token = token->next;
 	}
+	return (0);
 }
 
-void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
+int	tokens_has_builtin(t_token *token)
 {
-	int			pid;
-	t_command	*cmd;
-
-	pid = fork();
-	if (pid != 0)
+	while (token)
 	{
-		close_pipe(pin, pout);
-		return ;
+		if (is_builtin(token->name))
+			return (1);
+		token = token->next;
 	}
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGTSTP, SIG_DFL);
-	cmd = new_command(NULL, NULL, pin, pout);
-	while (current && current->type != Pipe)
+	return (0);
+}
+
+void	executor_builtin(t_mini	*mini)
+{
+	t_command	*cmd;
+	t_token		*current;
+
+	cmd = new_command(NULL, NULL, -1, -1);
+	current = *mini->tokens;
+	while (current)
 	{
 		if (current->type == Command)
 		{
 			cmd->name = current->name;
 			cmd->argv = current->argv;
 		}
-		else
-			open_redir(current, cmd);
+		// редиректы нужно поодкрывать тут
 		current = current->next;
 	}
-	execute_command(mini, cmd);
-}
-
-void	wait_childprocesses(void)
-{
-	int	exitinfo;
-
-	while (waitpid(-1, &exitinfo, 0) > 0)
-	{
-	}
-	g_status = WEXITSTATUS(exitinfo);
+	execute_builtin(mini, cmd);
 }
 
 void	execute(t_mini *mini)
 {
-	t_executer_utils	*utils;
-	int					fd[2];
-
-	utils = malloc(sizeof(t_executer_utils) * 1);
-	fill_executor_struct(utils, mini);
-	while (utils->current_fast)
+	if (tokens_has_builtin(*mini->tokens) && !tokens_has_pipe(*mini->tokens))
 	{
-		if (utils->current_fast->type == Pipe)
-		{
-			if (pipe(fd))
-				perror(NULL);
-			utils->pout = fd[1];
-			init_command(mini, utils->current_slow, utils->pin, utils->pout);
-			utils->pin = fd[0];
-			utils->current_slow = utils->current_fast->next;
-		}
-		utils->current_fast = utils->current_fast->next;
+		executor_builtin(mini);
+		return ;
 	}
-	init_command(mini, utils->current_slow, utils->pin, utils->pout);
-	wait_childprocesses();
-	post_execution(mini);
+	execute_bins(mini);
 }

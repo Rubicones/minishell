@@ -6,7 +6,7 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/06/27 14:56:27 by ejafer           ###   ########.fr        #
+#    Updated: 2022/06/29 15:45:23 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ NAMES	=	minishell\
 			executor/executor	executor/command			executor/open_redir\
 			executor/findpath	executor/duplicate_fd		executor/post_execution\
 			executor/execute_bin	executor/execute_builtin executor/executor_utils\
+			executor/executor_bins\
 			\
 			builtins/builtins	builtins/mini_echo\
 			builtins/mini_cd	builtins/mini_env	builtins/mini_pwd\
