@@ -6,40 +6,47 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:05:03 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/27 14:15:15 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/29 13:44:30 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
+#include "get_envvars.h"
+
+void	free_paths(char **paths)
+{
+	int	i;
+
+	i = -1;
+	while (paths[++i])
+		free(paths[i]);
+	free(paths);
+}
 
 char	*find_path(t_mini *mini, char *name)
 {
 	char	**paths;
 	char	*path;
 	int		i;
-	char	*part_path;
+	char	*to_append;
 
 	if (access(name, F_OK) == 0)
 		return (name);
-	i = 0;
-	while (ft_strncmp(mini->env[i], "PATH", 4))
-		i++;
-	paths = ft_split(mini->env[i] + 5, ':');
-	i = 0;
-	while (paths[i])
-	{
-		part_path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(part_path, name);
-		free(part_path);
-		if (access(path, F_OK) == 0)
-			return (path);
-		free(path);
-		i++;
-	}
+	path = NULL;
+	to_append = ft_strjoin("/", name);
+	paths = ft_split(envvar_get("PATH", mini->env), ':');
 	i = -1;
 	while (paths[++i])
-		free(paths[i]);
-	free(paths);
+	{
+		path = ft_strjoin(paths[i], to_append);
+		if (access(path, F_OK) == 0)
+			break ;
+		free(path);
+	}
+	free(to_append);
+	free_paths(paths);
+	if (paths[i])
+		return (path);
 	return (NULL);
 }

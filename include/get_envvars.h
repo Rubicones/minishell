@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:21:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/25 15:06:08 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/29 13:38:39 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ typedef struct s_lineinfo
 	char	*processed;
 	char	*raw;
 }	t_lineinfo;
+
+char	*envvar_get(char *name, char **env);
 
 #endif
