@@ -26,4 +26,6 @@ void	execute_builtin(t_mini *mini, t_command *cmd)
 		mini_pwd();
 	if (ft_strncmp(cmd->name, "exit", ft_strlen("exit")) == 0)
 		mini_exit(cmd);
+	if (ft_strncmp(cmd->name, "unset", ft_strlen("unset")) == 0)
+		mini_unset(cmd, mini->env);
 }
