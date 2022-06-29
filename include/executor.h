@@ -26,12 +26,23 @@ typedef struct s_command
 	int		*fdout;
 }	t_command;
 
+typedef struct s_executer_utils
+{
+	int		pin;
+	int		pout;
+	t_token	*current_fast;
+	t_token	*current_slow;
+}	t_executer_utils;
+
 t_command	*new_command(char *name, char **argv, int pin, int pout);
 char		*find_path(t_mini *mini, char *name);
+
+void		fill_executor_struct(t_executer_utils *utils, t_mini *mini);
 
 void		duplicate_fdout(int *fdout);
 void		duplicate_fdin(int *fdin);
 void		close_fds(t_command *cmd);
+void		close_pipe(int pin, int pout);
 
 int			*arrint_new(int len);
 int			arrint_len(int *arr);
