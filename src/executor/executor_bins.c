@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/29 15:32:37 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/29 16:01:50 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,4 @@ void	execute_bins(t_mini *mini)
 	}
 	init_command(mini, utils->current_slow, utils->pin, utils->pout);
 	wait_childprocesses();
-	post_execution(mini);
 }

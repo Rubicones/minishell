@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:22:01 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/29 15:45:44 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/29 16:02:10 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ void	executor_builtin(t_mini	*mini)
 void	execute(t_mini *mini)
 {
 	if (tokens_has_builtin(*mini->tokens) && !tokens_has_pipe(*mini->tokens))
-	{
 		executor_builtin(mini);
-		return ;
-	}
-	execute_bins(mini);
+	else
+		execute_bins(mini);
+	post_execution(mini);
 }

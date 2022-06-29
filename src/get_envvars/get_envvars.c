@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:26:52 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/29 13:54:23 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/29 15:58:01 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ void	resolve_envvars(t_mini *mini)
 		}
 		if (mini->line[i] == '$')
 		{
-			j = shift_to_separator(mini->line + i);
-			result = join_envvar(mini->env, result, mini->line + i + 1, j - 1);
+			j = shift_to_separator(mini->line + ++i);
+			result = join_envvar(mini->env, result, mini->line + i, j);
 			i += j;
 		}
 	}

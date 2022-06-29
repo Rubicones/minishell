@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:05:03 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/29 13:50:31 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/29 16:07:56 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*find_path(t_mini *mini, char *name)
 	int		i;
 	char	*to_append;
 
-	if (access(name, F_OK) == 0)
-		return (name);
+	if (access(name, X_OK) == 0)
+		return (ft_strdup(name));
 	path = NULL;
 	to_append = ft_strjoin("/", name);
 	paths = ft_split(envvar_get("PATH", mini->env), ':');
@@ -40,7 +40,7 @@ char	*find_path(t_mini *mini, char *name)
 	while (paths[++i])
 	{
 		path = ft_strjoin(paths[i], to_append);
-		if (access(path, F_OK) == 0)
+		if (access(path, X_OK) == 0)
 			break ;
 		free(path);
 	}
