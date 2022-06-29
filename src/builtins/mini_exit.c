@@ -23,10 +23,10 @@ void	mini_exit(t_command *cmd)
 	else
 	{
 		status = ft_atoi(cmd->argv[1]);
-		if (ft_nbrlen(status) != ft_strlen(cmd->argv[1]))
-			status = 128;
+		if (status > 255)
+			status %= 256;
 		if (status < 0)
-			status = -1;
+			status = 256 + (status % 256);
 	}
 	exit(status);
 }

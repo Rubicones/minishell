@@ -82,6 +82,7 @@ void		split_line(t_mini *mini);
 void		parse(t_mini *mini);
 void		execute(t_mini *mini);
 void		throw_error(int error_code);
+int			envar_position(char *name, char **env);
 
 t_token		*new_token(char	*new_name, t_type new_type);
 void		clear_tokens(t_token *token);

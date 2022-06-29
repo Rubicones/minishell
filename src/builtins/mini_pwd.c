@@ -14,7 +14,7 @@
 
 void	mini_pwd(void)
 {
-	char	path[1000];
+	char	path[10000];
 
 	if (getcwd(path, sizeof(path)) == NULL)
 		perror(path);
