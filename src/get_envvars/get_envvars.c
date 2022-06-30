@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:26:52 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 17:03:26 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:36:36 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char	*join_envvar(char **env, char *result, char *line, int len)
 	i = -1;
 	while (++i < len)
 		envvar_name[i] = line[i];
-	//printf("%s\n", envvar_name);
 	envvar_val = envvar_get(envvar_name, env);
 	free(envvar_name);
 	if (envvar_val)
