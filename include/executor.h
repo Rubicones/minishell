@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:20:28 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 16:16:28 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:40:06 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			*arrint_addback(int *old_arr, int new_elem);
 int			is_builtin(char	*name);
 
 void		execute_builtin(t_mini *mini, t_command *cmd);
-void		execute_bin(t_mini *mini, t_command *cmd, char *path);
+void		execute_command(t_mini *mini, t_command *cmd);
 void		post_execution(t_mini *mini);
 
 void		open_redir(t_token	*current, t_command *cmd);
