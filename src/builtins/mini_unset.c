@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:59 by ejafer            #+#    #+#             */
-/*   Updated: 2022/04/25 16:10:38 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 16:06:56 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,23 @@
 #include "libft.h"
 #include "get_envvars.h"
 
-char **delete_var(char **env, int pos, int len)
+char	**delete_var(char **env, int pos)
 {
-	int i;
-	char **new_env;
+	int		i;
+	char	**new_env;
 
-	new_env = malloc(sizeof(char *) * len + 1);
-	i = 0;
-	while (i < pos)
-	{
+	new_env = ft_arrnew(ft_arrlen(env) - 1);
+	i = -1;
+	while (++i < pos)
 		new_env[i] = ft_strdup(env[i]);
-		i++;
-	}
-	while (env[i + 1])
-	{
+	while (env[++i])
 		new_env[i] = ft_strdup(env[i + 1]);
-		i++;
-	}
 	return (new_env);
 }
 
-void free_env(char **env)
+void	free_env(char **env)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (env[++i])
@@ -47,20 +41,16 @@ void free_env(char **env)
 
 char	**mini_unset(t_command *cmd, char **env)
 {
-	int 	i;
-	char 	**new_env;
-	int 	env_len;
+	int		i;
+	char	**new_env;
 
-	env_len = 0;
 	i = envar_position(cmd->argv[1], env);
-	if (!(envvar_get(cmd->argv[1], env)))
+	if (!env[i])
 	{
 		g_status = 1;
 		return (env);
 	}
-	while (env[env_len])
-		env_len++;
-	new_env = delete_var(env, i, env_len);
+	new_env = delete_var(env, i);
 	free_env(env);
 	g_status = 0;
 	return (new_env);
