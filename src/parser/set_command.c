@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 16:05:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 19:46:09 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 21:55:34 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	set_command(t_parser *data)
 	t_token	*command_token;
 
 	name = ft_strdup(current_word(data));
-	if (ft_strchr("\'\"", name[0]) && ft_strchr("\'\"", name[ft_strlen(name)-1]))
+	if (ft_strchr("\'\"", name[0])
+		&& ft_strchr("\'\"", name[ft_strlen(name)-1])
+		&& name[0] == name[ft_strlen(name)-1])
 		name = remove_quotes(name);
 	command_token = new_token(name, Command);
 	token_push_back(data->head, command_token);

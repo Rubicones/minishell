@@ -24,7 +24,7 @@ char	**change_pwds(t_command *cmd, char **env, char *whatpwd)
 	if (!getcwd(pwd, sizeof(pwd)))
 		perror(pwd);
 	cmd->argv[1] = ft_strjoin(ft_strjoin(whatpwd, "="), pwd);
-	env = mini_export(cmd, env);
+	env = mini_export(cmd->argv, env);
 	return (env);
 }
 

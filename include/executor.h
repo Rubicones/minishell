@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:20:28 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 18:44:23 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 22:06:15 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char		**mini_cd(t_command *cmd, char **env);
 char		*mini_pwd(void);
 char		**mini_unset(char **argv, char **env);
 char		**unset_var(char *var, char **env);
-char		**mini_export(t_command *cmd, char **env);
+char		**export_var(char *arg, char **env);
+char		**mini_export(char **argv, char **env);
 void		free_env(char **env);
 
 #endif

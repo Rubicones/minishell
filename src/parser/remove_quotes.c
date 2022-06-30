@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 19:21:13 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/25 19:28:10 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 21:35:10 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ char	*remove_quotes(char *word)
 	char	*result;
 
 	len = ft_strlen(word) - 2;
-	result = malloc(sizeof(char) * (len + 1));
+	result = ft_strnew(len - 2);
 	i = -1;
 	while (++i < len)
 		result[i] = word[i + 1];
-	result[len] = 0;
 	free(word);
 	return (result);
 }

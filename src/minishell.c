@@ -6,11 +6,13 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:35:09 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 19:24:12 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 22:17:33 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "get_envvars.h"
+#include "executor.h"
 #include "libft.h"
 
 void	minishell(t_mini *mini)
@@ -30,7 +32,7 @@ void	minishell(t_mini *mini)
 		else
 		{
 			add_history(mini->line);
-			resolve_envvars(mini);
+			resolve_envvars(mini, 0, 0, 0);
 			split_line(mini);
 			parse(mini);
 			execute(mini);
@@ -38,18 +40,34 @@ void	minishell(t_mini *mini)
 	}
 }
 
-t_mini	*init_mini(int argc, char **argv, char **env)
+char	**preprocess_env(char **env)
 {
 	int		i;
+	int		shlvlint;
+	char	*shlvl;
+	char	**tmp;
+
+	tmp = ft_arrnew(ft_arrlen(env));
+	i = -1;
+	while (env[++i])
+		tmp[i] = ft_strdup(env[i]);
+	shlvl = envvar_get("SHLVL", tmp);
+	shlvlint = ft_atoi(shlvl) + 1;
+	free(shlvl);
+	shlvl = ft_itoa(shlvlint);
+	tmp = export_var(ft_strjoin("SHLVL=", shlvl), tmp);
+	free(shlvl);
+	return (tmp);
+}
+
+t_mini	*init_mini(int argc, char **argv, char **env)
+{
 	t_mini	*tmp;
 
 	tmp = malloc(sizeof(t_mini));
 	tmp->pid = getpid();
 	tmp->heredocid = 0;
-	tmp->env = ft_arrnew(ft_arrlen(env));
-	i = -1;
-	while (env[++i])
-		tmp->env[i] = ft_strdup(env[i]);
+	tmp->env = preprocess_env(env);
 	tmp->argc = argc;
 	tmp->argv = argv;
 	return (tmp);
@@ -73,7 +91,6 @@ char	**dup_env(char **env)
 int	main(int argc, char **argv, char **env)
 {
 	t_mini	*mini;
-	char	**new_env;
 
 	g_status = 0;
 	init_sighandler();

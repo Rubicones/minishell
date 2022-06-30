@@ -79,7 +79,7 @@ typedef struct s_parser
 
 void		init_sighandler(void);
 
-void		resolve_envvars(t_mini *mini);
+void		resolve_envvars(t_mini *mini, int squoutes, int dquouts, int i);
 void		split_line(t_mini *mini);
 void		parse(t_mini *mini);
 void		execute(t_mini *mini);

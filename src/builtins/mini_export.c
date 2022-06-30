@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:55 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 18:52:08 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 22:04:46 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ char	**export_var(char *arg, char **env)
 	return (env);
 }
 
-char	**mini_export(t_command *cmd, char **env)
+char	**mini_export(char **argv, char **env)
 {
 	int		i;
 
 	i = 0;
-	while (cmd->argv[++i])
-		env = export_var(cmd->argv[i], env);
+	while (argv[++i])
+		env = export_var(argv[i], env);
 	g_status = 0;
 	return (env);
 }

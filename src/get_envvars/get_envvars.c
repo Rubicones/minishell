@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:26:52 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 17:36:36 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 21:57:54 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,21 @@ int	shift_to_separator(char *str)
 	return (j);
 }
 
-void	resolve_envvars(t_mini *mini)
+void	resolve_envvars(t_mini *mini, int squoutes, int dquoutes, int i)
 {
-	int			i;
 	int			j;
-	int			ignore;
 	char		*result;
 
 	result = ft_strnew(0);
-	ignore = 0;
-	i = 0;
 	while (mini->line[i])
 	{
-		while (mini->line[i] && (mini->line[i] != '$' || ignore))
+		while (mini->line[i]
+			&& (mini->line[i] != '$' || (squoutes && dquoutes)))
 		{
-			if (mini->line[i] == '\'')
-				ignore = 1 - ignore;
+			if (!dquoutes && mini->line[i] == '\'')
+				squoutes = 1 - squoutes;
+			if (!squoutes && mini->line[i] == '\"')
+				dquoutes = dquoutes - 1;
 			result = ft_str_addletter(result, mini->line[i]);
 			i++;
 		}
