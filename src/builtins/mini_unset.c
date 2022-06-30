@@ -29,7 +29,7 @@ char **delete_var(char **env, int pos, int len)
 	}
 	while (env[i + 1])
 	{
-		new_env[i] = env[i + 1];
+		new_env[i] = ft_strdup(env[i + 1]);
 		i++;
 	}
 	return (new_env);
@@ -44,8 +44,7 @@ void free_env(char **env)
 		free(env[i]);
 	free(env);
 }
-//надо освобождать env, но тогда по какой-то причине в new_env будет мусор, хотя там копия,
-// а не указатель, надо разбираться
+
 char	**mini_unset(t_command *cmd, char **env)
 {
 	int 	i;
