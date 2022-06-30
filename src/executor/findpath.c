@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:05:03 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 17:34:47 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 19:17:19 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,12 @@ char	*find_path_env(char *name, char *envvar)
 		if (access(path, X_OK) == 0)
 			break ;
 		free(path);
+		path = NULL;
 	}
 	free(to_append);
 	free(envvar);
 	free_paths(paths);
-	if (paths[i])
-		return (path);
-	return (NULL);
+	return (path);
 }
 
 char	*find_path(t_mini *mini, char *name)
