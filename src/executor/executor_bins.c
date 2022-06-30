@@ -6,61 +6,18 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 17:36:00 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:45:05 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "executor.h"
 #include "libft.h"
-#include <sys/stat.h>
-
-int	is_regular_file(const char *path)
-{
-	struct stat	statbuf;
-
-	stat(path, &statbuf);
-	return (S_ISREG(statbuf.st_mode));
-}
-
-void	execute_command(t_mini *mini, t_command *cmd)
-{
-	char	*path;
-	char	*errormsg;
-
-	path = find_path(mini, cmd->name);
-	if (path && is_regular_file(path))
-		execute_bin(mini, cmd, path);
-	else
-	{
-		if (path)
-		{
-			free(path);
-			errormsg = ft_strjoin(cmd->name, ": Is a directory\n");
-		}
-		else
-			errormsg = ft_strjoin(cmd->name, ": commnad not found\n");
-		if (write(STDERR_FILENO, errormsg, ft_strlen(errormsg)) < 0)
-			perror(errormsg);
-		free(errormsg);
-		exit(127);
-	}
-}
 
 void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 {
-	int			pid;
 	t_command	*cmd;
 
-	pid = fork();
-	if (pid != 0)
-	{
-		close_pipe(pin, pout);
-		return ;
-	}
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGTSTP, SIG_DFL);
 	cmd = new_command(NULL, NULL, pin, pout);
 	while (current && current->type != Pipe)
 	{
@@ -79,6 +36,30 @@ void	init_command(t_mini *mini, t_token	*current, int pin, int pout)
 		exit (0);
 	}
 	execute_command(mini, cmd);
+}
+
+void	init_fork(t_mini *mini, t_token	*current, int pin, int pout)
+{
+	int			pid;
+
+	pid = fork();
+	if (pid > 0)
+	{
+		close_pipe(pin, pout);
+		return ;
+	}
+	else if (pid < 0)
+	{
+		close_pipe(pin, pout);
+		perror("fork");
+		return ;
+	}
+	else 
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		init_command(mini, current, pin, pout);
+	}
 }
 
 void	wait_childprocesses(void)
@@ -104,12 +85,12 @@ void	execute_bins(t_mini *mini)
 			if (pipe(fd))
 				perror("pipe");
 			utils->pout = fd[1];
-			init_command(mini, utils->current_slow, utils->pin, utils->pout);
+			init_fork(mini, utils->current_slow, utils->pin, utils->pout);
 			utils->pin = fd[0];
 			utils->current_slow = utils->current_fast->next;
 		}
 		utils->current_fast = utils->current_fast->next;
 	}
-	init_command(mini, utils->current_slow, utils->pin, utils->pout);
+	init_fork(mini, utils->current_slow, utils->pin, utils->pout);
 	wait_childprocesses();
 }
