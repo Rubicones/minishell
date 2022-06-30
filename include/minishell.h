@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/29 13:49:37 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 19:24:00 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <errno.h>
+
+# define SHELLNAME "\033[32mMinishell\033[0m$: "
 
 # define QUOTES_D	'"'
 # define QUOTES_S	'\''

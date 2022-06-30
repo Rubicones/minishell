@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:35:09 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 14:18:53 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 19:24:12 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	minishell(t_mini *mini)
 {
 	while (1)
 	{
-		mini->line = readline("\033[32mMinishell\033[0m$: ");
+		mini->line = readline(SHELLNAME);
 		if (!mini->line)
 		{
 			g_status = 128 - 1;
