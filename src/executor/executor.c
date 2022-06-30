@@ -50,7 +50,6 @@ void	executor_builtin(t_mini	*mini)
 			cmd->name = current->name;
 			cmd->argv = current->argv;
 		}
-		// редиректы нужно поодкрывать тут
 		current = current->next;
 	}
 	execute_builtin(mini, cmd);

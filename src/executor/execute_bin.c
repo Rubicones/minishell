@@ -48,7 +48,7 @@ void	execute_command(t_mini *mini, t_command *cmd)
 			errormsg = ft_strjoin(cmd->name, ": Is a directory\n");
 		}
 		else
-			errormsg = ft_strjoin(cmd->name, ": commnad not found\n");
+			errormsg = ft_strjoin(cmd->name, ": command not found\n");
 		if (write(STDERR_FILENO, errormsg, ft_strlen(errormsg)) < 0)
 			perror(errormsg);
 		free(errormsg);
