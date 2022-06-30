@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 15:25:21 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:09:55 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	is_regular_file(const char *path)
 void	execute_command(t_mini *mini, t_command *cmd)
 {
 	char	*path;
+	char	*errormsg;
 
 	path = find_path(mini, cmd->name);
 	if (path && is_regular_file(path))
@@ -33,8 +34,15 @@ void	execute_command(t_mini *mini, t_command *cmd)
 	else
 	{
 		if (path)
+		{
 			free(path);
-		perror(cmd->name);
+			errormsg = ft_strjoin(cmd->name, ": Is a directory\n");
+		}
+		else
+			errormsg = ft_strjoin(cmd->name, ": commnad not found\n");
+		if (write(2, errormsg, ft_strlen(errormsg)) < 0)
+			perror(errormsg);
+		free(errormsg);
 		exit(127);
 	}
 }

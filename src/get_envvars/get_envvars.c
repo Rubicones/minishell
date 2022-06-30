@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:26:52 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 16:40:31 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:03:26 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*join_envvar(char **env, char *result, char *line, int len)
 	i = -1;
 	while (++i < len)
 		envvar_name[i] = line[i];
+	//printf("%s\n", envvar_name);
 	envvar_val = envvar_get(envvar_name, env);
 	free(envvar_name);
 	if (envvar_val)
@@ -73,10 +74,10 @@ int	shift_to_separator(char *str)
 {
 	int	j;
 
-	j = 1;
-	while (str[j]
+	j = -1;
+	while (str[++j]
 		&& !ft_strchr(SEPARATORS, str[j]))
-		j++;
+		;
 	return (j);
 }
 
@@ -101,9 +102,9 @@ void	resolve_envvars(t_mini *mini)
 		}
 		if (mini->line[i] == '$')
 		{
-			j = shift_to_separator(mini->line + i + 1);
-			result = join_envvar(mini->env, result, mini->line + i + 1, j);
-			i += j + 1;
+			j = shift_to_separator(mini->line + ++i);
+			result = join_envvar(mini->env, result, mini->line + i, j);
+			i = i + j;
 		}
 	}
 	mini->line = result;

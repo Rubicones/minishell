@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:51 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 16:07:51 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:18:20 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	mini_echo(t_command *cmd)
 
 	i = 0;
 	new_line = "\n";
-	if (ft_strlen(cmd->argv[1]) == 2 && ft_strncmp(cmd->argv[1], "-n", 2) == 0)
+	if (cmd->argv[1]
+		&& ft_strlen(cmd->argv[1]) == 2
+		&& ft_strncmp(cmd->argv[1], "-n", 2) == 0)
 	{
 		++i;
 		new_line = "";
