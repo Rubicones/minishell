@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:35:09 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 11:49:28 by                  ###   ########.fr       */
+/*   Updated: 2022/06/30 14:18:53 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,27 @@ void	minishell(t_mini *mini)
 	}
 }
 
-char **dup_env(char **env)
+t_mini	*init_mini(int argc, char **argv, char **env)
 {
-	int i;
-	char **new_env;
+	int		i;
+	t_mini	*tmp;
+
+	tmp = malloc(sizeof(t_mini));
+	tmp->pid = getpid();
+	tmp->heredocid = 0;
+	tmp->env = ft_arrnew(ft_arrlen(env));
+	i = -1;
+	while (env[++i])
+		tmp->env[i] = ft_strdup(env[i]);
+	tmp->argc = argc;
+	tmp->argv = argv;
+	return (tmp);
+}
+
+char	**dup_env(char **env)
+{
+	int		i;
+	char	**new_env;
 
 	i = 0;
 	while (env[i])
@@ -56,17 +73,11 @@ char **dup_env(char **env)
 int	main(int argc, char **argv, char **env)
 {
 	t_mini	*mini;
-	char **new_env;
+	char	**new_env;
 
 	g_status = 0;
 	init_sighandler();
-	new_env = dup_env(env);
-	mini = malloc(sizeof(t_mini));
-	mini->pid = getpid();
-	mini->heredocid = 0;
-	mini->env = new_env;
-	mini->argc = argc;
-	mini->argv = argv;
+	mini = init_mini(argc, argv, env);
 	minishell(mini);
 	return (0);
 }

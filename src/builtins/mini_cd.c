@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:53 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 12:01:56 by                  ###   ########.fr       */
+/*   Updated: 2022/06/30 14:41:09 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,23 @@ void	change_pwds(char *oldpwd, char *pwd, char **env)
 {
 	char	*temp;
 	int		pos;
-	char	*target;
 
-	target = envvar_get("PWD", env);
 	pos = envar_position("PWD", env);
-	free(env[pos]);
-	if (target)
+	if (env[pos])
 	{
-		temp = ft_strjoin("PWD=", pwd);
-		env[pos] = ft_strdup(temp);
+		temp = env[pos];
+		env[pos] = ft_strjoin("PWD=", oldpwd);
 		free(temp);
 	}
 	else
 		return ;
-	free(target);
-	target = envvar_get("OLDPWD", env);
 	pos = envar_position("OLDPWD", env);
-	free(env[pos]);
-	if (target)
+	if (env[pos])
 	{
-		temp = ft_strjoin("OLDPWD=", oldpwd);
-		env[pos] = ft_strdup(temp);
+		temp = env[pos];
+		env[pos] = ft_strjoin("OLDPWD=", oldpwd);
 		free(temp);
 	}
-	free(target);
 }
 
 void	mini_cd(t_command *cmd, char **env)
@@ -56,7 +49,8 @@ void	mini_cd(t_command *cmd, char **env)
 		target = ft_strdup(cmd->argv[1]);
 	else
 		target = envvar_get("HOME", env);
-	getcwd(oldpwd, sizeof(oldpwd));
+	if (!getcwd(oldpwd, sizeof(oldpwd)))
+		perror(oldpwd);
 	if (chdir(target) == -1)
 	{
 		perror(target);
@@ -64,7 +58,8 @@ void	mini_cd(t_command *cmd, char **env)
 		g_status = 1;
 		return ;
 	}
-	getcwd(pwd, sizeof(pwd));
+	if (!getcwd(pwd, sizeof(pwd)))
+		perror(pwd);
 	change_pwds(oldpwd, pwd, env);
 	free(target);
 	g_status = 0;
