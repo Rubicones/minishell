@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 02:58:27 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 16:34:34 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 22:07:17 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	execute_builtin(t_mini *mini, t_command *cmd)
 	if (ft_strncmp(cmd->name, "unset", ft_strlen("unset")) == 0)
 		mini->env = mini_unset(cmd->argv, mini->env);
 	if (ft_strncmp(cmd->name, "export", ft_strlen("export")) == 0)
-		mini->env = mini_export(cmd, mini->env);
+		mini->env = mini_export(cmd->argv, mini->env);
 }

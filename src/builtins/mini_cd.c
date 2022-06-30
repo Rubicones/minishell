@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:53 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 20:10:28 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 22:07:53 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**change_pwds(t_command *cmd, char **env, int i)
 		if (!getcwd(pwd, sizeof(pwd)))
 			perror(pwd);
 		cmd->argv[1] = ft_strjoin("OLDPWD=", pwd);
-		env = mini_export(cmd, env);
+		env = mini_export(cmd->argv, env);
 	}
 	if (i == 2)
 	{
@@ -35,7 +35,7 @@ char	**change_pwds(t_command *cmd, char **env, int i)
 		if (!getcwd(pwd, sizeof(pwd)))
 			perror(pwd);
 		cmd->argv[1] = ft_strjoin("PWD=", pwd);
-		env = mini_export(cmd, env);
+		env = mini_export(cmd->argv, env);
 	}
 	return (env);
 }
