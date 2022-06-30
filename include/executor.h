@@ -63,7 +63,7 @@ void		open_redirout_a(char *filename, t_command *cmd);
 void		mini_echo(t_command *cmd);
 void		mini_exit(t_command *cmd);
 char		*mini_env(t_mini *mini);
-void		mini_cd(t_command *cmd, char **env);
+char		**mini_cd(t_command *cmd, char **env);
 char		*mini_pwd(void);
 char		**mini_unset(char **argv, char **env);
 char		**unset_var(char *var, char **env);

@@ -19,7 +19,7 @@ void	execute_builtin(t_mini *mini, t_command *cmd)
 	if (ft_strncmp(cmd->name, "echo", ft_strlen("echo")) == 0)
 		mini_echo(cmd);
 	if (ft_strncmp(cmd->name, "cd", ft_strlen("cd")) == 0)
-		mini_cd(cmd, mini->env);
+		mini->env = mini_cd(cmd, mini->env);
 	if (ft_strncmp(cmd->name, "env", ft_strlen("env")) == 0)
 		mini_env(mini);
 	if (ft_strncmp(cmd->name, "pwd", ft_strlen("pwd")) == 0)

@@ -15,49 +15,50 @@
 #include "libft.h"
 #include "get_envvars.h"
 
-void	change_pwds(char *oldpwd, char *pwd, char **env)
+char	**change_pwds(t_command *cmd, char **env, int i)
 {
-	int		pos;
+	char pwd[10000];
 
-	pos = envar_position("PWD", env);
-	if (env[pos])
+	if (i == 1)
 	{
-		free(env[pos]);
-		env[pos] = ft_strjoin("PWD=", pwd);
+		cmd->argv[1] = "OLDPWD";
+		env = mini_unset(cmd->argv, env);
+		if (!getcwd(pwd, sizeof(pwd)))
+			perror(pwd);
+		cmd->argv[1] = ft_strjoin("OLDPWD=", pwd);
+		env = mini_export(cmd, env);
 	}
-	else
-		return ;
-	pos = envar_position("OLDPWD", env);
-	if (env[pos])
+	if (i == 2)
 	{
-		free(env[pos]);
-		env[pos] = ft_strjoin("OLDPWD=", oldpwd);
+		cmd->argv[1] = "PWD";
+		env = mini_unset(cmd->argv, env);
+		if (!getcwd(pwd, sizeof(pwd)))
+			perror(pwd);
+		cmd->argv[1] = ft_strjoin("PWD=", pwd);
+		env = mini_export(cmd, env);
 	}
+	return (env);
 }
 
-void	mini_cd(t_command *cmd, char **env)
+char	**mini_cd(t_command *cmd, char **env)
 {
 	char	*target;
-	char	oldpwd[10000];
-	char	pwd[10000];
 
 	target = NULL;
 	if (cmd->argv[1])
 		target = ft_strdup(cmd->argv[1]);
 	else
 		target = envvar_get("HOME", env);
-	if (!getcwd(oldpwd, sizeof(oldpwd)))
-		perror(oldpwd);
+	env = change_pwds(cmd, env, 1);
 	if (chdir(target) == -1)
 	{
 		perror(target);
 		free(target);
 		g_status = 1;
-		return ;
+		return (env);
 	}
-	if (!getcwd(pwd, sizeof(pwd)))
-		perror(pwd);
-	change_pwds(oldpwd, pwd, env);
+	env = change_pwds(cmd, env, 2);
 	free(target);
 	g_status = 0;
+	return (env);
 }
