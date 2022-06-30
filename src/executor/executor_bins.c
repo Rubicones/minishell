@@ -6,23 +6,34 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/29 16:01:50 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 15:25:21 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "executor.h"
 #include "libft.h"
+#include <sys/stat.h>
+
+int	is_regular_file(const char *path)
+{
+	struct stat	statbuf;
+
+	stat(path, &statbuf);
+	return (S_ISREG(statbuf.st_mode));
+}
 
 void	execute_command(t_mini *mini, t_command *cmd)
 {
 	char	*path;
 
 	path = find_path(mini, cmd->name);
-	if (path)
+	if (path && is_regular_file(path))
 		execute_bin(mini, cmd, path);
 	else
 	{
+		if (path)
+			free(path);
 		perror(cmd->name);
 		exit(127);
 	}
