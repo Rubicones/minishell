@@ -32,7 +32,7 @@ NAMES	=	minishell\
 			\
 			builtins/builtins	builtins/mini_echo\
 			builtins/mini_cd	builtins/mini_env	builtins/mini_pwd\
-			builtins/mini_exit	builtins/mini_unset
+			builtins/mini_exit	builtins/mini_unset	builtins/mini_export\
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/

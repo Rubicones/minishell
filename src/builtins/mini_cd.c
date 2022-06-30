@@ -24,7 +24,7 @@ void	change_pwds(char *oldpwd, char *pwd, char **env)
 	if (env[pos])
 	{
 		temp = env[pos];
-		env[pos] = ft_strjoin("PWD=", oldpwd);
+		env[pos] = ft_strjoin("PWD=", pwd);
 		free(temp);
 	}
 	else
