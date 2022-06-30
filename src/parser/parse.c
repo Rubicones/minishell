@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 19:20:31 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/25 19:30:31 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 19:41:37 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	add_to_argv(t_parser *data)
 
 	argv = data->current_command->argv;
 	arg = ft_strdup(current_word(data));
-	if (ft_strchr("\'\"", arg[0]))
+	if (ft_strchr("\'\"", arg[0]) && ft_strchr("\'\"", arg[ft_strlen(arg)-1]))
 		arg = remove_quotes(arg);
 	argv = ft_arr_addback(argv, current_word(data));
 	data->current_command->argv = argv;
