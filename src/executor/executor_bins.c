@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:02:47 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 17:09:55 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:35:07 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	execute_command(t_mini *mini, t_command *cmd)
 
 	path = find_path(mini, cmd->name);
 	if (path && is_regular_file(path))
-		execute_bin(mini, cmd, path);
+		execute_bin(mini, cmd, path); 
 	else
 	{
 		if (path)
@@ -40,7 +40,7 @@ void	execute_command(t_mini *mini, t_command *cmd)
 		}
 		else
 			errormsg = ft_strjoin(cmd->name, ": commnad not found\n");
-		if (write(2, errormsg, ft_strlen(errormsg)) < 0)
+		if (write(STDERR_FILENO, errormsg, ft_strlen(errormsg)) < 0)
 			perror(errormsg);
 		free(errormsg);
 		exit(127);
