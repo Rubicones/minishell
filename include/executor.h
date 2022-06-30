@@ -67,5 +67,6 @@ void		mini_cd(t_command *cmd, char **env);
 char		*mini_pwd(void);
 char		**mini_unset(t_command *cmd, char **env);
 char		**mini_export(t_command *cmd, char **env);
+void		free_env(char **env);
 
 #endif
