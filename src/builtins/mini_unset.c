@@ -55,7 +55,7 @@ char	**mini_unset(t_command *cmd, char **env)
 	i = envar_position(cmd->argv[1], env);
 	if (!(envvar_get(cmd->argv[1], env)))
 	{
-		g_status = 1;
+		g_status = 0;
 		return (env);
 	}
 	while (env[env_len])
