@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:53 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 14:41:09 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 15:53:23 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,21 @@
 
 void	change_pwds(char *oldpwd, char *pwd, char **env)
 {
-	char	*temp;
 	int		pos;
 
 	pos = envar_position("PWD", env);
 	if (env[pos])
 	{
-		temp = env[pos];
+		free(env[pos]);
 		env[pos] = ft_strjoin("PWD=", pwd);
-		free(temp);
 	}
 	else
 		return ;
 	pos = envar_position("OLDPWD", env);
 	if (env[pos])
 	{
-		temp = env[pos];
+		free(env[pos]);
 		env[pos] = ft_strjoin("OLDPWD=", oldpwd);
-		free(temp);
 	}
 }
 
