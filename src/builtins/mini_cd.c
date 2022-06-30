@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:53 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 15:53:23 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 20:10:28 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 char	**change_pwds(t_command *cmd, char **env, int i)
 {
-	char pwd[10000];
+	char	pwd[10000];
 
 	if (i == 1)
 	{
