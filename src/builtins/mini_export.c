@@ -23,11 +23,11 @@ char **add_var(char **env, int len, char *arg)
 
 	(void)j;
 	(void)arg;
-	new_env = malloc(sizeof(char *) * (len + 2));
+	new_env = malloc(sizeof(char *) * (len + 1));
 	i = -1;
 	while (env[++i])
 		new_env[i] = ft_strdup(env[i]);
-	new_env[i] = ft_strjoin("$", arg);
+	new_env[i] = ft_strdup(arg);
 	return (new_env);
 }
 
@@ -42,9 +42,14 @@ char	**mini_export(t_command *cmd, char **env)
 		g_status = 1;
 		return (env);
 	}
-	if (!(ft_strchr(cmd->argv[1], '=')) || !(ft_isalpha(cmd->argv[1][0])))
+	if (!(ft_strchr(cmd->argv[1], '=')))
 	{
 		g_status = 0;
+		return (env);
+	}
+	if (!(ft_isalpha(cmd->argv[1][0])))
+	{
+		g_status = 1;
 		return (env);
 	}
 	while (env[env_len])

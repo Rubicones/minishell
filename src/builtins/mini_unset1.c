@@ -43,8 +43,15 @@ char	**unset_var(char *var, char **env)
 	int		pos;
 	char	**tmp;
 
+<<<<<<< HEAD
 	pos = envar_position(var, env);
 	if (!env[pos])
+=======
+	i = envar_position(cmd->argv[1], env);
+	if (!env[i])
+	{
+		g_status = 0;
+>>>>>>> b4bcfb98bbd8741dc86c59be768c9b3a2103334c
 		return (env);
 	tmp = env;
 	env = delete_var(env, pos);
