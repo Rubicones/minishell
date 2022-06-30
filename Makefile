@@ -6,7 +6,7 @@
 #    By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 21:01:58 by ejafer            #+#    #+#              #
-#    Updated: 2022/06/30 20:23:00 by ejafer           ###   ########.fr        #
+#    Updated: 2022/07/01 01:09:17 by ejafer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,10 @@ NAMES	=	minishell\
 			executor/execute_bin	executor/execute_builtin executor/executor_utils\
 			executor/executor_bins\
 			\
-			builtins/builtins	builtins/mini_echo\
+			builtins/builtins	builtins/mini_echo	builtins/mini_cd_utils\
 			builtins/mini_cd	builtins/mini_env	builtins/mini_pwd\
 			builtins/mini_exit	builtins/mini_unset	builtins/mini_export\
+			builtins/print_errormsg\
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/

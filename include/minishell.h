@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:44:32 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 19:24:00 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/07/01 01:11:58 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ int			is_redirout_a(char *word);
 void		set_redir(t_mini *mini, t_parser *data);
 void		set_pipe(t_parser *data);
 void		set_command(t_parser *data);
+
+void		print_errormsg(char *errormsg);
 
 #endif

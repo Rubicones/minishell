@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:20:28 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 22:06:15 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/07/01 01:05:32 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,17 @@ void		open_redirout_a(char *filename, t_command *cmd);
 void		mini_echo(t_command *cmd);
 void		mini_exit(t_command *cmd);
 char		*mini_env(t_mini *mini);
-char		**mini_cd(t_command *cmd, char **env);
+char		**mini_cd(char **argv, char **env);
 char		*mini_pwd(void);
 char		**mini_unset(char **argv, char **env);
 char		**unset_var(char *var, char **env);
 char		**export_var(char *arg, char **env);
 char		**mini_export(char **argv, char **env);
 void		free_env(char **env);
+
+char		**real_cd(char *target, char **env);
+char		**cd_to_many_arguments(char **env);
+char		**cd_no_arguments(char **env);
+char		**cd_back(char **env);
 
 #endif
