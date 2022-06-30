@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:26:52 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 21:57:54 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/07/01 01:35:54 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ void	resolve_envvars(t_mini *mini, int squoutes, int dquoutes, int i)
 	while (mini->line[i])
 	{
 		while (mini->line[i]
-			&& (mini->line[i] != '$' || (squoutes && dquoutes)))
+			&& (mini->line[i] != '$' || squoutes))
 		{
 			if (!dquoutes && mini->line[i] == '\'')
 				squoutes = 1 - squoutes;
 			if (!squoutes && mini->line[i] == '\"')
-				dquoutes = dquoutes - 1;
+				dquoutes = 1 - dquoutes;
 			result = ft_str_addletter(result, mini->line[i]);
 			i++;
 		}
