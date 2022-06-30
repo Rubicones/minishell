@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:26:52 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/29 15:58:01 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 16:40:31 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*envvar_get(char *name, char **env)
 		return (result);
 	}
 	i = envar_position(name, env);
-	if (env[i] == NULL)
+	if (!env[i])
 		return (NULL);
 	result = ft_strdup(env[i] + ft_strlen(name) + 1);
 	return (result);
@@ -53,8 +53,7 @@ char	*join_envvar(char **env, char *result, char *line, int len)
 	char	*envvar_name;
 	char	*envvar_val;
 
-	envvar_name = malloc(sizeof(char) * (len + 1));
-	envvar_name[len] = 0;
+	envvar_name = ft_strnew(len);
 	i = -1;
 	while (++i < len)
 		envvar_name[i] = line[i];
@@ -102,9 +101,9 @@ void	resolve_envvars(t_mini *mini)
 		}
 		if (mini->line[i] == '$')
 		{
-			j = shift_to_separator(mini->line + ++i);
-			result = join_envvar(mini->env, result, mini->line + i, j);
-			i += j;
+			j = shift_to_separator(mini->line + i + 1);
+			result = join_envvar(mini->env, result, mini->line + i + 1, j);
+			i += j + 1;
 		}
 	}
 	mini->line = result;

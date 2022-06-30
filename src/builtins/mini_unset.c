@@ -6,13 +6,12 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:03:59 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/30 16:06:56 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 16:34:48 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "executor.h"
 #include "libft.h"
+#include "minishell.h"
 #include "get_envvars.h"
 
 char	**delete_var(char **env, int pos)
@@ -25,7 +24,7 @@ char	**delete_var(char **env, int pos)
 	while (++i < pos)
 		new_env[i] = ft_strdup(env[i]);
 	while (env[++i])
-		new_env[i] = ft_strdup(env[i + 1]);
+		new_env[i - 1] = ft_strdup(env[i]);
 	return (new_env);
 }
 
@@ -39,19 +38,27 @@ void	free_env(char **env)
 	free(env);
 }
 
-char	**mini_unset(t_command *cmd, char **env)
+char	**unset_var(char *var, char **env)
+{
+	int		pos;
+	char	**tmp;
+
+	pos = envar_position(var, env);
+	if (!env[pos])
+		return (env);
+	tmp = env;
+	env = delete_var(env, pos);
+	free_env(tmp);
+	return (env);
+}
+
+char	**mini_unset(char **argv, char **env)
 {
 	int		i;
-	char	**new_env;
 
-	i = envar_position(cmd->argv[1], env);
-	if (!env[i])
-	{
-		g_status = 1;
-		return (env);
-	}
-	new_env = delete_var(env, i);
-	free_env(env);
+	i = 0;
+	while (argv[++i])
+		env = unset_var(argv[i], env);
 	g_status = 0;
-	return (new_env);
+	return (env);
 }

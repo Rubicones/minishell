@@ -6,7 +6,7 @@
 /*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:20:28 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/29 15:43:41 by ejafer           ###   ########.fr       */
+/*   Updated: 2022/06/30 16:16:28 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		mini_exit(t_command *cmd);
 char		*mini_env(t_mini *mini);
 void		mini_cd(t_command *cmd, char **env);
 char		*mini_pwd(void);
-char		**mini_unset(t_command *cmd, char **env);
+char		**mini_unset(char **argv, char **env);
 char		**mini_export(t_command *cmd, char **env);
 void		free_env(char **env);
 
